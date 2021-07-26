@@ -35,7 +35,7 @@ api.interceptors.request.use(
     const data = localStorage.get()
     if (data) {
       // eslint-disable-next-line no-param-reassign
-      config.headers.common.Authorization = `Bearer ${data.token}`
+      config.headers.common.Authorization = `${data.token}`
     }
     return config
   },

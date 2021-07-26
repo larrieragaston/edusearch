@@ -60,14 +60,13 @@ export default function Login() {
 
   // const onFinish = async (values, { setIsSubmitting }) => {
   const onFinish = async (values) => {
-    debugger;
     setIsSubmitting(true)
     console.log('Success:', values)
     try {
       const response = await sessionService.create(values.email, values.password)
       const payload = { token: response.token, user: response.user }
       localStorage.set(payload)
-      navigate('/dashboard')
+      navigate('/')
     } catch (e) {
       const message = errorMessage(e)
       toast.error(message)
@@ -81,7 +80,7 @@ export default function Login() {
   };
 
   return redirectHome ? (
-    <Redirect from="/login" to="/dashboard" noThrow />
+    <Redirect path="/login" to="/" noThrow />
   ) : (
     <Row>
       <Col span={12}>

@@ -9,12 +9,7 @@ export const fetchModelsParams = {
 export const timeDifference = 30 // minutes
 export const maxTime = 18 // hours
 export const minTime = 9 // hours
-export const roles = {
-  admin: 'admin',
-  doctor: 'doctor',
-  patient: 'paciente',
-  secretary: 'secretaria',
-}
+
 export const theme = {
   palette: {
     common: {
@@ -56,6 +51,7 @@ export const theme = {
     },
   },
 }
+
 export const dashboardCardTypes = {
   FAVOURITE_TO_EXPIRE:'FAVOURITE_TO_EXPIRE',
   PERSONAL_DATA_COMPLETED:'PERSONAL_DATA_COMPLETED',
@@ -63,6 +59,7 @@ export const dashboardCardTypes = {
   PUBLISHED_RESULTS:'PUBLISHED_RESULTS',
   NEW_CONTESTS:'NEW_CONTESTS'
 }
+
 export const contestSteps = [
   "Primer llamado a Docentes",
   "Análisis de solicitudes",
@@ -72,3 +69,12 @@ export const contestSteps = [
   "Publicacion de resultados",
   "Cierre del concurso"
 ]
+
+export const noInformation = "Sin Información"
+
+export const roles = {
+  Teacher: 'Teacher',
+  UAdmin: 'UAdmin',
+  UCouncilMember: 'UCouncilMember',
+  UHumanResources: 'UHumanResources',
+}

@@ -24,7 +24,7 @@ export default function DashboardNumber({ data }) {
     }
 
     return (
-        <Card style={{ width: 200 }}>
+        <Card style={{ width: 250 }}>
             <Row justify='center'><Title level={2} style={{ color: 'blue' }}>{data.quantity}</Title></Row>
             <Row>
                 <Text style={{ textAlign: 'center' }}>
