@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react'
-// import { css, jsx } from '@emotion/core'
 import { navigate, Redirect } from '@reach/router'
 import localStorage from '../../services/localStorage'
 import sessionService from '../../services/session'
@@ -8,47 +7,11 @@ import { toast } from 'react-toastify'
 import { Row, Col, Form, Input, Button, Typography } from 'antd'
 import imgSrc from '../../assets/teacher.png'
 import logoSrc from '../../assets/logo.png'
+import styles from './login.module.css';
 
 const { Title, Text, Link } = Typography;
 
-// const styles = {
-//   container: css`
-//     min-heigth: 100vw;
-//     display: flex;
-//     flex-direction: row;
-//   `,
-//   leftContainer: css`
-//     flex: 1;
-//   `,
-//   imgStyle: css`
-//   heigth: 100%;
-//   width: 100%;
-// `,
-//   rightContainer: css`
-//     flex: 1;
-//     display: flex;
-//     flex-direction: column;
-//   `,
-//   logoContainer: css`
-//   flex: 1;
-//   display: flex;
-//   padding-top: 10px;
-//   padding-right: 10px;
-//   `,
-//   formContainer: css`
-//   flex: 1;
-//   display: flex;
-//   justify-content: center;
-//   `,
-//   footerContainer: css`
-//   flex: 1;
-//   display: flex;
-//   justify-content: center;
-//   align-items: flex-end;
-//   `
-// }
 export default function Login() {
-
   const [redirectHome, setRedirectHome] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -82,81 +45,81 @@ export default function Login() {
   return redirectHome ? (
     <Redirect path="/login" to="/" noThrow />
   ) : (
-    <Row>
+    <div className={styles.container}>
       <Col span={12}>
-        <img alt={"portada"} src={imgSrc} />
+        <img alt={"portada"} src={imgSrc} className={styles.leftImg}/>
       </Col>
-      <Col span={12}>
-        <Row justify="end">
-          <img alt={"logo-EduSearch"} src={logoSrc} />
-        </Row>
-        <Row justify="center">
-          <Col span={16} >
-            <Title level={5}>Iniciar Sesión</Title>
-          </Col>
-        </Row>
-        <Row align="middle" justify="center">
-          <Col span={16}>
-            <Form
-              layout="vertical"
-              name="basic"
-              initialValues={{
-                remember: true,
-              }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-            >
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Campo obligatorio',
-                  },
-                  {
-                    type: 'email',
-                    message: 'Ingresá un email válido',
-                  }
-                ]}
+      <Col span={12} className={styles.rightColumn}>
+        <img alt={"logo-EduSearch"} src={logoSrc} className={styles.logo}/>
+        <div className={styles.content}>
+          <Row justify="center">
+            <Col span={16} >
+              <Title level={5}>Iniciar Sesión</Title>
+            </Col>
+          </Row>
+          <Row align="middle" justify="center">
+            <Col span={16}>
+              <Form
+                  layout="vertical"
+                  name="basic"
+                  initialValues={{
+                    remember: true,
+                  }}
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
               >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                label="Contraseña"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Campo obligatorio',
-                  },
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-
-              <Form.Item>
-                {!isSubmitting ?
-                  <Button type="primary" htmlType="submit" block>
-                    Iniciar sesión
-                  </Button> :
-                  <Button type="primary" loading block>
-                    Loading
-                  </Button>}
-              </Form.Item>
-              <Row justify="end">
-                <Form.Item >
-                  <Link href="#"> ¿Olvidaste tu contraseña? </Link>
+                <Form.Item
+                    label="Email"
+                    name="email"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Campo obligatorio',
+                      },
+                      {
+                        type: 'email',
+                        message: 'Ingresá un email válido',
+                      }
+                    ]}
+                >
+                  <Input />
                 </Form.Item>
-              </Row>
-            </Form>
-          </Col>
-        </Row>
-        <Row align="bottom" justify="center">
-          <Text level={5}>No tenes una cuenta <Link strong href="#"> Crea tu cuenta </Link></Text>
-        </Row>
+
+                <Form.Item
+                    label="Contraseña"
+                    name="password"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Campo obligatorio',
+                      },
+                    ]}
+                >
+                  <Input.Password />
+                </Form.Item>
+
+                <Form.Item>
+                  {!isSubmitting ?
+                      <Button type="primary" htmlType="submit" block>
+                        Iniciar sesión
+                      </Button> :
+                      <Button type="primary" loading block>
+                        Loading
+                      </Button>}
+                </Form.Item>
+                <Row justify="end">
+                  <Form.Item >
+                    <Link href="#"> ¿Olvidaste tu contraseña? </Link>
+                  </Form.Item>
+                </Row>
+              </Form>
+            </Col>
+          </Row>
+          <Row align="bottom" justify="center">
+            <Text level={5}>No tenes una cuenta <Link strong href="#"> Crea tu cuenta </Link></Text>
+          </Row>
+        </div>
       </Col>
-    </Row>
+    </div>
   );
 };

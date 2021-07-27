@@ -1,0 +1,7 @@
+.sider-content {
+  background: #fff!important;
+}
+
+.sider-content .ant-layout-sider-trigger {
+  display: none;
+}

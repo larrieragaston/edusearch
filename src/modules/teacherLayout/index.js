@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
+import './teacherLayout.css';
+import { navigate, Router } from '@reach/router'
 import logoSrc from '../../assets/logo.png'
 import { Layout, Menu, Avatar, Button, Popover } from 'antd';
 import { MoreOutlined, BarChartOutlined, ProfileOutlined, ContainerOutlined, UserOutlined, InfoCircleOutlined, BellOutlined, QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
@@ -9,11 +11,11 @@ import PersonalInformation from './personalInformation'
 import ProfessionalInformation from './professionalInformation'
 import { UserContext } from '../../contexts/userContext';
 import userService from '../../services/user';
-import { navigate } from '@reach/router'
 import localStorage from '../../services/localStorage'
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
+const fullHeight = { height: '100%' }
 
 // const navigationByRole = {
 //     [roles.Teacher]: teacherNavigation,
@@ -63,13 +65,13 @@ export default function TeacherLayout() {
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider collapsible collapsed={collapsed}>
+            <Sider collapsible collapsed={collapsed} className="sider-content" width={280}>
                 <Menu defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="0" icon={<MoreOutlined />} onClick={() => setCollapsed(!collapsed)} />
-                    <Menu.Item key="1" icon={<BarChartOutlined />}>
+                    <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('dashboard')}>
                         Dashboard
                     </Menu.Item>
-                    <Menu.Item key="2" icon={<UserOutlined />}>
+                    <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('settings')}>
                         Datos Personales
                     </Menu.Item>
                     <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV">
@@ -113,19 +115,20 @@ export default function TeacherLayout() {
                 </Header>
                 <Content style={{ margin: '0 16px' }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                        {/* <Home /> */}
-                        {/* <AccountSettings /> */}
-                        {/* <PersonalInformation /> */}
-                        {/* <ContestDetails /> */}
-                        {/* <ProfessionalInformation /> */}
-                        <AccountSettings data={{
-                            firstName: 'Gastón Ariel',
-                            lastName: 'Larriera',
-                            email: 'gaston@email.com',
-                            password: 'admin1234',
-                            hasNotificationsEnabled: true
-                        }} />
-                        {/* <PersonalInformation data={{
+                        <Router style={fullHeight}>
+                             <Home path="/dashboard" />
+                            {/* <AccountSettings /> */}
+                            {/* <PersonalInformation /> */}
+                            {/* <ContestDetails />*/}
+                            {/* <ProfessionalInformation /> */}
+                            <AccountSettings path="/settings" data={{
+                                firstName: 'Gastón Ariel',
+                                lastName: 'Larriera',
+                                email: 'gaston@email.com',
+                                password: 'admin1234',
+                                hasNotificationsEnabled: true
+                            }} />
+                            {/* <PersonalInformation data={{
                             firstName: 'Gastón Ariel',
                             lastName: 'Larriera',
                             idNumber: '11223344',
@@ -135,7 +138,7 @@ export default function TeacherLayout() {
                             birthDate: '01/01/1900',
                             birthPlace: 'Capital Federal'
                         }} /> */}
-                        {/* <ContestDetails data={{
+                            {/* <ContestDetails data={{
                             subjectName: 'Programacion I',
                             periodType: 'Anual',
                             universityName: 'UADE',
@@ -155,6 +158,8 @@ export default function TeacherLayout() {
                                 { name: 'Con un interlineado más grande', optional: true },
                                 { name: 'Que los textos normales.', optional: false }]
                         }} /> */}
+                        </Router>
+
                     </div>
                 </Content>
             </Layout>

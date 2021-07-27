@@ -22,7 +22,7 @@ function Routes() {
       {/* <UserContext.Provider value={userProvider}> */}
         {/* <Home path="/" /> */}
         <Login path="/login" />
-        <TeacherLayout path="/" />
+        <TeacherLayout path="/*" />
         {/* <Register path="/register" /> */}
         {/* <Forgot path="/forgot" /> */}
         {/* <Dashboard path="/dashboard">
