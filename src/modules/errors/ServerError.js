@@ -8,7 +8,7 @@ function ServerError() {
             status="500"
             title="500"
             subTitle="Lo sentimos, ha ocurrido un error inesperado."
-            extra={<Button type="primary" onClick={() => navigate('/login')}>Volver al inicio</Button>}
+            extra={<Button type="primary" onClick={() => navigate('/dashboard')}>Volver al inicio</Button>}
         />
     )
 }

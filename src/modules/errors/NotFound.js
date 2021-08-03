@@ -8,7 +8,7 @@ function NotFound() {
             status="404"
             title="404"
             subTitle="Lo sentimos, la pagina que está tratando de visitar no existe."
-            extra={<Button type="primary" onClick={() => navigate('/login')}>Volver al inicio</Button>}
+            extra={<Button type="primary" onClick={() => navigate('/dashboard')}>Volver al inicio</Button>}
         />
     )
 }

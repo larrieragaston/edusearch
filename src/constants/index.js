@@ -1,3 +1,6 @@
+import { countriesList } from './countries'
+import { provincesList } from './provinces'
+
 export const apiTimeout = 1000 * 15 // 15 sec
 export const apiBaseUrl = 'http://localhost:4000'
 export const boxShadow = '0px 5px 25px 0px rgba(0, 0, 0, 0.2)'
@@ -53,11 +56,11 @@ export const theme = {
 }
 
 export const dashboardCardTypes = {
-  FAVOURITE_TO_EXPIRE:'FAVOURITE_TO_EXPIRE',
-  PERSONAL_DATA_COMPLETED:'PERSONAL_DATA_COMPLETED',
-  ACTIVE_APPLICATIONS:'ACTIVE_APPLICATIONS',
-  PUBLISHED_RESULTS:'PUBLISHED_RESULTS',
-  NEW_CONTESTS:'NEW_CONTESTS'
+  FAVOURITE_TO_EXPIRE: 'FAVOURITE_TO_EXPIRE',
+  PERSONAL_DATA_COMPLETED: 'PERSONAL_DATA_COMPLETED',
+  ACTIVE_APPLICATIONS: 'ACTIVE_APPLICATIONS',
+  PUBLISHED_RESULTS: 'PUBLISHED_RESULTS',
+  NEW_CONTESTS: 'NEW_CONTESTS'
 }
 
 export const contestSteps = [
@@ -78,3 +81,7 @@ export const roles = {
   UCouncilMember: 'UCouncilMember',
   UHumanResources: 'UHumanResources',
 }
+
+export const countries = countriesList
+
+export const provinces = provincesList

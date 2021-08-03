@@ -8,7 +8,7 @@ function NotAuthorized() {
             status="403"
             title="403"
             subTitle="Lo sentimos, no está autorizado a ingresar a esta pagina."
-            extra={<Button type="primary" onClick={() => navigate('/login')}>Volver al inicio</Button>}
+            extra={<Button type="primary" onClick={() => navigate('/dashboard')}>Volver al inicio</Button>}
         />
     )
 }

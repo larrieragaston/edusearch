@@ -1,17 +1,19 @@
-import React, { useEffect, useState, useContext } from 'react'
-import './teacherLayout.css';
+import React, { useState, useMemo, useContext } from 'react'
+import './mainLayout.css';
 import { navigate, Router } from '@reach/router'
 import logoSrc from '../../assets/logo.png'
 import { Layout, Menu, Avatar, Button, Popover } from 'antd';
 import { MoreOutlined, BarChartOutlined, ProfileOutlined, ContainerOutlined, UserOutlined, InfoCircleOutlined, BellOutlined, QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
-import Home from './home'
-import AccountSettings from './accountSettings'
-import ContestDetails from './contestDetails'
-import PersonalInformation from './personalInformation'
-import ProfessionalInformation from './professionalInformation'
+import Home from '../home'
+import AccountSettings from '../accountSettings'
+import ContestDetails from '../contestDetails'
+import Contests from '../contests'
+import PersonalInformation from '../personalInformation'
+import ProfessionalInformation from '../professionalInformation'
 import { UserContext } from '../../contexts/userContext';
 import userService from '../../services/user';
 import localStorage from '../../services/localStorage'
+import FAQ from '../faq';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -31,22 +33,20 @@ const fullHeight = { height: '100%' }
 //     { title: 'Usuarios', url: 'user-list' },
 //   ]
 
-export default function TeacherLayout() {
+export default function MainLayout() {
     const [collapsed, setCollapsed] = useState(false)
-    // const { userData, setUserData } = useContext(UserContext)
+    const { userData, setUserData } = useContext(UserContext)
 
-    // useEffect(async () => {
-    //     const response = await userService.getUserByToken()
-    //     console.log(response)
-    //     // setUserData(response)
-    // }, [])
-
-    React.useMemo(async () => {
+    useMemo(async () => {
         const data = localStorage.get()
         if (!data?.token) {
             navigate('/login')
         }
-        // setNavigation(navigationByRole[data?.user?.role])
+        else {
+            // setNavigation(navigationByRole[data?.user?.role])
+            const response = await userService.getUserByToken()
+            setUserData(response)
+        }
     }, [])
 
     const logout = () => {
@@ -56,9 +56,9 @@ export default function TeacherLayout() {
 
     const content = (
         <div style={{ maxWidth: 200 }}>
-            <Button type="text" block>Datos personales</Button>
-            <Button type="text" block>Mi CV</Button>
-            <Button type="text" block>Configuración de la cuenta</Button>
+            <Button type="text" block onClick={() => navigate('personal-information')}>Datos personales</Button>
+            {/* <Button type="text" block>Mi CV</Button> */}
+            <Button type="text" block onClick={() => navigate('acccount-settings')}>Configuración de la cuenta</Button>
             <Button type="text" block onClick={() => logout()}>Cerrar sesión</Button>
         </div>
     );
@@ -71,10 +71,10 @@ export default function TeacherLayout() {
                     <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('dashboard')}>
                         Dashboard
                     </Menu.Item>
-                    <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('settings')}>
+                    <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('personal-information')}>
                         Datos Personales
                     </Menu.Item>
-                    <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV">
+                    <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('professional-information')}>
                         <Menu.Item key="3">Formación Superior y Media</Menu.Item>
                         <Menu.Item key="4">Formación Complementaria</Menu.Item>
                         <Menu.Item key="5">Becas</Menu.Item>
@@ -86,12 +86,12 @@ export default function TeacherLayout() {
                         <Menu.Item key="11">Producciones Académicas</Menu.Item>
                         <Menu.Item key="12">Premios</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos">
+                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos" onTitleClick={() => navigate('contests')}>
                         <Menu.Item key="13">Todos</Menu.Item>
                         <Menu.Item key="14">Postulaciones</Menu.Item>
                         <Menu.Item key="15">Favoritos</Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="16" icon={<QuestionCircleOutlined />}>
+                    <Menu.Item key="16" icon={<QuestionCircleOutlined />} onClick={() => navigate('faq')}>
                         F.A.Q.
                     </Menu.Item>
                     <Menu.Item key="17" icon={<LogoutOutlined />} onClick={() => logout()}>
@@ -116,28 +116,15 @@ export default function TeacherLayout() {
                 <Content style={{ margin: '0 16px' }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                         <Router style={fullHeight}>
-                             <Home path="/dashboard" />
-                            {/* <AccountSettings /> */}
-                            {/* <PersonalInformation /> */}
+                            <Home path="/dashboard" />
+                            <AccountSettings path="/acccount-settings" />
+                            <PersonalInformation path="/personal-information" />
+                            <ProfessionalInformation path="/professional-information" />
+                            <Contests path="/contests-all" />
+                            <ContestDetails path="/contest/:id" />
+                            <FAQ path="/faq" />
                             {/* <ContestDetails />*/}
-                            {/* <ProfessionalInformation /> */}
-                            <AccountSettings path="/settings" data={{
-                                firstName: 'Gastón Ariel',
-                                lastName: 'Larriera',
-                                email: 'gaston@email.com',
-                                password: 'admin1234',
-                                hasNotificationsEnabled: true
-                            }} />
-                            {/* <PersonalInformation data={{
-                            firstName: 'Gastón Ariel',
-                            lastName: 'Larriera',
-                            idNumber: '11223344',
-                            phone: '4444-4444',
-                            mobilePhone: '15-5555-5555',
-                            email: 'gaston@email.com',
-                            birthDate: '01/01/1900',
-                            birthPlace: 'Capital Federal'
-                        }} /> */}
+                            {/* <ProfessionalInformation path="/my-resume"/> */}
                             {/* <ContestDetails data={{
                             subjectName: 'Programacion I',
                             periodType: 'Anual',
@@ -159,7 +146,6 @@ export default function TeacherLayout() {
                                 { name: 'Que los textos normales.', optional: false }]
                         }} /> */}
                         </Router>
-
                     </div>
                 </Content>
             </Layout>

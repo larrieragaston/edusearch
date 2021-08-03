@@ -1,32 +1,72 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Typography, Button, Divider, Tabs, Steps, List } from 'antd';
+import { Row, Col, Typography, Button, Divider, Tabs, Steps, List, Modal } from 'antd'
 import logoSrc from '../../assets/logo.png'
 import { HeartOutlined, DownloadOutlined } from '@ant-design/icons'
 import { contestSteps, noInformation } from '../../constants'
-import teacherContestService from '../../services/teacherContest';
+import contestService from '../../services/contest'
+import postulationService from '../../services/postulation'
+import moment from 'moment'
 
 const { Text } = Typography;
 const { TabPane } = Tabs;
 const { Step } = Steps;
 
-export default function ContestDetails() {
+export default function ContestDetails(props) {
 
-    const getSteps = (hasColloquium) => {
-        if (hasColloquium)
-            return contestSteps.filter(x => x !== 'Coloquio').map(x => <Step title={x} />)
-        else
-            return contestSteps.map(x => <Step title={x} />)
-    }
     const [data, setContest] = useState([])
 
     useEffect(() => {
         async function fetchData() {
-            const response = await teacherContestService.getContestById('000000000000000000000000')
-            console.log(response)
-            setContest(response)
+            const contest = await contestService.getContestById(props.id)
+            console.log('contest')
+            console.log(contest)
+            setContest(contest)
         }
         fetchData()
-    }, [])
+    }, [props.id])
+
+    const getSteps = (hasColloquium) => {
+        if (hasColloquium)
+            return contestSteps.filter(x => x !== 'Coloquio').map(x => <Step key={x} title={x} />)
+        else
+            return contestSteps.map(x => <Step key={x} title={x} />)
+    }
+
+    const getDaysDifferenceText = (date) => {
+        const dateMoment = moment(date, 'YYYY-MM-DDT00:00:00.000+00:00')
+        const today = moment();
+        const diffDays = dateMoment.diff(today, 'days');
+        return diffDays < 0 ? `Las posulaciones ya se encuentran cerradas` : `Quedan ${diffDays} días para que se cierren las postulaciones`;
+    }
+
+    function success() {
+        Modal.success({
+            title: 'Felicitaciones!',
+            content: 'Muchas gracias por su postulacion',
+        });
+    }
+
+    function error() {
+        Modal.error({
+            title: 'Ups!',
+            content: 'No se ha podido realizar la postulacion',
+        });
+    }
+
+
+    const postulate = async (contestId) => {
+        try {
+            const payload = { contest: contestId }
+            const response = await postulationService.postulate(payload)
+            success()
+        } catch (e) {
+            // const message = errorMessage(e)
+            error()
+        }
+        // finally {
+        //     setSubmitting(false)
+        // }
+    }
 
     return (
         <React.Fragment>
@@ -35,8 +75,8 @@ export default function ContestDetails() {
                     <Row>{data.subject?.name ?? noInformation}</Row>
                     <Row>
                         {data.dueDate ?
-                            <Text>No se ha establecido una fecha para el cierren las postulaciones aun</Text> :
-                            <Text>Quedan {data.dueDate} días para que se cierren las postulaciones</Text>}
+                            <Text>{getDaysDifferenceText(data.dueDate)}</Text> :
+                            <Text>No se ha establecido una fecha para el cierren las postulaciones aun</Text>}
                     </Row>
                     <Row>
                         <HeartOutlined />
@@ -59,7 +99,7 @@ export default function ContestDetails() {
                     <Row justify="end">
                         {data.hasPostulation ?
                             <Button type='primary' disabled>Postulado</Button> :
-                            <Button type='primary'>Postularme</Button>}
+                            <Button type='primary' onClick={() => postulate(data._id)}>Postularme</Button>}
                     </Row>
                 </Col>
             </Row>

@@ -9,7 +9,9 @@ const userService = {}
 // userService.getUsers = () => api.get('/users')
 
 userService.getUserByToken = () => api.get('/users/me')
-userService.getPersonalInformation = () => api.get('/users/personalInformation')
+// userService.getPersonalInformation = () => api.get('/users/personalInformation')
+userService.updateUserByToken = (payload) => api.put('/users/me', {...payload})
+// userService.update = (userId, payload) => api.put(`/users/${userId}`, { ...payload })
 
 // userService.getPatients = () => api.get('/users/patients')
 // userService.getDoctors = () => api.get('/users/doctors')
