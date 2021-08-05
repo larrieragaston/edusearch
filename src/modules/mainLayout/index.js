@@ -56,9 +56,9 @@ export default function MainLayout() {
 
     const content = (
         <div style={{ maxWidth: 200 }}>
-            <Button type="text" block onClick={() => navigate('personal-information')}>Datos personales</Button>
+            <Button type="text" block onClick={() => navigate('/personal-information')}>Datos personales</Button>
             {/* <Button type="text" block>Mi CV</Button> */}
-            <Button type="text" block onClick={() => navigate('acccount-settings')}>Configuración de la cuenta</Button>
+            <Button type="text" block onClick={() => navigate('/acccount-settings')}>Configuración de la cuenta</Button>
             <Button type="text" block onClick={() => logout()}>Cerrar sesión</Button>
         </div>
     );
@@ -68,13 +68,13 @@ export default function MainLayout() {
             <Sider collapsible collapsed={collapsed} className="sider-content" width={280}>
                 <Menu defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="0" icon={<MoreOutlined />} onClick={() => setCollapsed(!collapsed)} />
-                    <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('dashboard')}>
+                    <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('/dashboard')}>
                         Dashboard
                     </Menu.Item>
-                    <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('personal-information')}>
+                    <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('/personal-information')}>
                         Datos Personales
                     </Menu.Item>
-                    <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('professional-information')}>
+                    <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('/professional-information')}>
                         <Menu.Item key="3">Formación Superior y Media</Menu.Item>
                         <Menu.Item key="4">Formación Complementaria</Menu.Item>
                         <Menu.Item key="5">Becas</Menu.Item>
@@ -86,12 +86,12 @@ export default function MainLayout() {
                         <Menu.Item key="11">Producciones Académicas</Menu.Item>
                         <Menu.Item key="12">Premios</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos" onTitleClick={() => navigate('contests')}>
+                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos" onTitleClick={() => navigate('/contests')}>
                         <Menu.Item key="13">Todos</Menu.Item>
                         <Menu.Item key="14">Postulaciones</Menu.Item>
                         <Menu.Item key="15">Favoritos</Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="16" icon={<QuestionCircleOutlined />} onClick={() => navigate('faq')}>
+                    <Menu.Item key="16" icon={<QuestionCircleOutlined />} onClick={() => navigate('/faq')}>
                         F.A.Q.
                     </Menu.Item>
                     <Menu.Item key="17" icon={<LogoutOutlined />} onClick={() => logout()}>
@@ -123,28 +123,6 @@ export default function MainLayout() {
                             <Contests path="/contests-all" />
                             <ContestDetails path="/contest/:id" />
                             <FAQ path="/faq" />
-                            {/* <ContestDetails />*/}
-                            {/* <ProfessionalInformation path="/my-resume"/> */}
-                            {/* <ContestDetails data={{
-                            subjectName: 'Programacion I',
-                            periodType: 'Anual',
-                            universityName: 'UADE',
-                            hasPostulation: true,
-                            days: ['Lunes', 'Martres', 'Miercoles'],
-                            dueDate: '25/08/2021',
-                            scheduleFrom: '08:00',
-                            scheduleTo: '12:00',
-                            activeStep: 3,
-                            subjectProgram: 'Acá este espacio se lo dejamos a las distintas universidades para que escriban lo que quieran al docente por si creen que es necesario hacer alguna anotación previa a descargarse el programa de la materia o curso . Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius enim eu velit pulvinar congue. Duis aliquam molestie ante, ac ullamcorper magna semper ut. Cras quam leo, condimentum commodo erat convallis, tincidunt convallis ligula. Integer leo libero, luctus sed lacinia sit amet',
-                            subjectProgramLink: '',
-                            requirements: [
-                                { name: 'Acá enlistas los requisitos del docente', optional: false },
-                                { name: 'Como cinco o seis cosas.', optional: false },
-                                { name: 'Asi se veria algo que no cumple', optional: true },
-                                { name: 'Y que evidentemente queden cinco ítems.', optional: false },
-                                { name: 'Con un interlineado más grande', optional: true },
-                                { name: 'Que los textos normales.', optional: false }]
-                        }} /> */}
                         </Router>
                     </div>
                 </Content>
