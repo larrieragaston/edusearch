@@ -30,9 +30,8 @@ function Routes() {
       </Dashboard> */}
 
         {/*ERRORES*/}
-        <NotFound default />
         <NotAuthorized path="/403" />
-        <NotFound path="/404" />
+        <NotFound default path="/404" />
         <ServerError path="/500" />
       </Router>
     </UserContext.Provider>
