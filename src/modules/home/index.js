@@ -28,9 +28,10 @@ export default function Home() {
             <Row>
                 <WelcomeTitle data={{ name: 'Gastón' }} />
             </Row>
-            <Row>
+            <Row justify='start'>
                 <DashboardNumber data={{ quantity: 4, type: 'NEW_CONTESTS' }} />
                 <DashboardNumber data={{ quantity: '80%', type: 'PERSONAL_DATA_COMPLETED' }} />
+                <DashboardNumber data={{ quantity: 1, type: 'NEW_CONTESTS' }} />
                 <DashboardNumber data={{ quantity: 1, type: 'NEW_CONTESTS' }} />
             </Row>
             <Row>
