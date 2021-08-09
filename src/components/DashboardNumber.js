@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Row, Typography } from 'antd'
 import { dashboardCardTypes } from '../constants'
+import styles from './DashboardNumber.css'
 
 const { Title, Text } = Typography
 
@@ -24,13 +25,9 @@ export default function DashboardNumber({ data }) {
     }
 
     return (
-        <Card style={{ width: 250 }}>
-            <Row justify='center'><Title level={2} style={{ color: 'blue' }}>{data.quantity}</Title></Row>
-            <Row>
-                <Text style={{ textAlign: 'center' }}>
-                    {getCardText(data.type)}
-                </Text>
-            </Row>
+        <Card style={{ width: '16em', margin: '0.5em', borderRadius: '15px', textAlign: 'center', }}>
+            <Title level={2} style={{ color: 'blue', marginBottom: '0.2em' }}>{data.quantity}</Title>
+            <p style={{lineHeight: '20px'}}>{getCardText(data.type)}</p>
         </Card>
     )
 }

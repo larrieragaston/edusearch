@@ -2,7 +2,7 @@ import React, { useState, useMemo, useContext } from 'react'
 import './mainLayout.css';
 import { navigate, Router } from '@reach/router'
 import logoSrc from '../../assets/logo.png'
-import { Layout, Menu, Avatar, Button, Popover } from 'antd';
+import { Layout, Menu, Avatar, Button, Popover, PageHeader, Tag } from 'antd';
 import { MoreOutlined, BarChartOutlined, ProfileOutlined, ContainerOutlined, UserOutlined, InfoCircleOutlined, BellOutlined, QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import Home from '../home'
 import AccountSettings from '../accountSettings'
@@ -14,6 +14,7 @@ import { UserContext } from '../../contexts/userContext';
 import userService from '../../services/user';
 import localStorage from '../../services/localStorage'
 import FAQ from '../faq';
+import styles from './mainLayout.css'
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -100,18 +101,19 @@ export default function MainLayout() {
                 </Menu>
             </Sider>
             <Layout className="site-layout">
-                <Header className="site-layout-background" style={{ padding: 0 }}>
-                    <Menu mode="horizontal">
-                        <Menu.Item key="1" disabled><img alt={"logo-EduSearch"} src={logoSrc} /></Menu.Item>
-                        <Menu.Item key="2" disabled><Button type="primary" disabled>Docente</Button></Menu.Item>
-                        <Menu.Item key="3" icon={<InfoCircleOutlined style={{ fontSize: 20 }} />} />
-                        <Menu.Item key="4" icon={<BellOutlined style={{ fontSize: 20 }} />} />
-                        <Menu.Item key="5" >
-                            <Popover placement="bottomRight" content={content}>
-                                <Avatar icon={<UserOutlined />} />
-                            </Popover>
-                        </Menu.Item>
-                    </Menu>
+                <Header className="site-layout-background" style={{ padding: '0', alignItems: 'center' }}>
+                    <PageHeader
+                        ghost={false}
+                        title={<img alt={"logo-EduSearch"} src={logoSrc} />}
+                        extra={[
+                            <Tag key='4' color="blue">Docente</Tag>,
+                            <Button key="3" shape='circle' size='large' icon={<InfoCircleOutlined />} />,
+                            <Button key="2" shape='circle' size='large' icon={<BellOutlined />} />,
+                            <Popover key="1" placement="bottomRight" content={content}>
+                                <Avatar size='large' icon={<UserOutlined />} />
+                            </Popover>,
+                        ]}
+                    ></PageHeader>
                 </Header>
                 <Content style={{ margin: '0 16px' }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
