@@ -73,7 +73,7 @@ export default function PersonalInformation() {
                 <Text type='secondary' className={styles.sectionsubtitle}>Información básica, como tu nombre y foto, que verán las Universidades al momento de tu postulación.</Text>
             </Row>
             <Row justify='center'>
-                <Card style={{ width: '80%' }}>
+                <Card style={{ width: '80%' }} bodyStyle={{ padding: '15px 35px', borderRadius: '5px', boxShadow: '0px 7px 6px rgb(0 0 0 / 7%)' }}>
                     <Row>
                         <Title level={5} className={styles.insidetitle}>Información Básica</Title>
                     </Row>
