@@ -15,8 +15,6 @@ export default function Home() {
     useEffect(() => {
         async function fetchData() {
             const contestForUser = await contestService.getContestForUser()
-            console.log('contestForUser - home')
-            console.log(contestForUser)
             setContests(contestForUser)
             setContestsCount(contestForUser.length)
         }

@@ -13,8 +13,6 @@ export default function Contests() {
     useEffect(() => {
         async function fetchData() {
             const contestForUser = await contestService.getContestForUser()
-            console.log('contestForUser - contests')
-            console.log(contestForUser)
             setContests(contestForUser)
             setContestsCount(contestForUser.length)
         }

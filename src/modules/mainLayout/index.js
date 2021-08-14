@@ -87,7 +87,7 @@ export default function MainLayout() {
                         <Menu.Item key="11">Producciones Académicas</Menu.Item>
                         <Menu.Item key="12">Premios</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos" onTitleClick={() => navigate('/contests')}>
+                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos" onTitleClick={() => navigate('/contests-all')}>
                         <Menu.Item key="13">Todos</Menu.Item>
                         <Menu.Item key="14">Postulaciones</Menu.Item>
                         <Menu.Item key="15">Favoritos</Menu.Item>
