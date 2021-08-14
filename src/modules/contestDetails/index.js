@@ -18,8 +18,6 @@ export default function ContestDetails(props) {
     useEffect(() => {
         async function fetchData() {
             const contest = await contestService.getContestById(props.id)
-            console.log('contest')
-            console.log(contest)
             setContest(contest)
         }
         fetchData()

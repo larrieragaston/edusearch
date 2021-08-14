@@ -6,6 +6,7 @@ import { UserContext } from '../../contexts/userContext';
 import errorMessage from '../../utils/errorMessage'
 import { toast } from 'react-toastify'
 import moment from 'moment';
+import styles from './personal.module.css';
 
 const { Option } = Select;
 const { Text, Title } = Typography;
@@ -66,133 +67,133 @@ export default function PersonalInformation() {
 
         <React.Fragment>
             <Row justify='center'>
-                <Title level={3}>Datos Personales</Title>
+                <Title level={3} className={styles.sectiontitle}>Datos Personales</Title>
             </Row>
             <Row justify='center'>
-                <Text type='secondary'>Información básica, como tu nombre y foto, que verán las Universidades al momento de tu postulación</Text>
+                <Text type='secondary' className={styles.sectionsubtitle}>Información básica, como tu nombre y foto, que verán las Universidades al momento de tu postulación.</Text>
             </Row>
             <Row justify='center'>
-                <Card style={{ width: '80%' }}>
+                <Card style={{ width: '80%' }} bodyStyle={{ padding: '15px 35px', borderRadius: '5px', boxShadow: '0px 7px 6px rgb(0 0 0 / 7%)' }}>
                     <Row>
-                        <Title level={5}>Información Básica</Title>
+                        <Title level={5} className={styles.insidetitle}>Información Básica</Title>
                     </Row>
                     {!isEditing ?
                         <>
                             <Row>
                                 <Col span={8}>
-                                    <Row>
-                                        <Text type='primary'>Nombre/es</Text>
+                                    <Row className="Pru">
+                                        <Text type='primary' className={styles.textprimary}>Nombre/es</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.firstName ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.firstName ?? noInformation}</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='primary'>Lugar de nacimiento</Text>
+                                        <Text type='primary' className={styles.textprimary}>Lugar de nacimiento</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.birthPlace ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.birthPlace ?? noInformation}</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='primary'>Teléfono fijo</Text>
+                                        <Text type='primary' className={styles.textprimary}>Teléfono fijo</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.phone ?? noInformation}</Text>
-                                    </Row>
-                                </Col>
-                                <Col span={8}>
-                                    <Row>
-                                        <Text type='primary'>Apellido/s</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='secondary'>{data?.lastName ?? noInformation}</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='primary'>Fecha de nacimiento</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='secondary'>{data?.birthDate ? moment(data.birthDate, 'YYYY-MM-DDT00:00:00.000+00:00').format('DD-MM-YYYY') : noInformation}</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='primary'>Teléfono celular</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='secondary'>{data?.mobilePhone ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.phone ?? noInformation}</Text>
                                     </Row>
                                 </Col>
                                 <Col span={8}>
                                     <Row>
-                                        <Text type='primary'>DNI/Pasaporte</Text>
+                                        <Text type='primary' className={styles.textprimary}>Apellido/s</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.idNumber ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.lastName ?? noInformation}</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='primary'>Correo electrónico</Text>
+                                        <Text type='primary' className={styles.textprimary}>Fecha de nacimiento</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.email ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.birthDate ? moment(data.birthDate, 'YYYY-MM-DDT00:00:00.000+00:00').format('DD-MM-YYYY') : noInformation}</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='primary' className={styles.textprimary}>Teléfono celular</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.mobilePhone ?? noInformation}</Text>
+                                    </Row>
+                                </Col>
+                                <Col span={8}>
+                                    <Row>
+                                        <Text type='primary' className={styles.textprimary}>DNI/Pasaporte</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.idNumber ?? noInformation}</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='primary' className={styles.textprimary}>Correo electrónico</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.email ?? noInformation}</Text>
                                     </Row>
                                 </Col>
                             </Row>
-                            <Divider orientation="left">Residencia</Divider>
+                            <Divider orientation="left" className={styles.insidesubtitle}>Residencia</Divider>
                             <Row>
                                 <Col span={8}>
                                     <Row>
-                                        <Text type='primary'>País</Text>
+                                        <Text type='primary' className={styles.textprimary}>País</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.address?.country ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.address?.country ?? noInformation}</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='primary'>Calle</Text>
+                                        <Text type='primary' className={styles.textprimary}>Calle</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.address?.street ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.address?.street ?? noInformation}</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='primary'>Departamento</Text>
+                                        <Text type='primary' className={styles.textprimary}>Departamento</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.address?.department ?? noInformation}</Text>
-                                    </Row>
-                                </Col>
-                                <Col span={8}>
-                                    <Row>
-                                        <Text type='primary'>Provincia</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='secondary'>{data?.address?.province ?? noInformation}</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='primary'>Número</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='secondary'>{data?.address?.number ?? noInformation}</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='primary'>Código Postal</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text type='secondary'>{data?.address?.postalCode ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.address?.department ?? noInformation}</Text>
                                     </Row>
                                 </Col>
                                 <Col span={8}>
                                     <Row>
-                                        <Text type='primary'>Localidad</Text>
+                                        <Text type='primary' className={styles.textprimary}>Provincia</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.address?.locality ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.address?.province ?? noInformation}</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='primary'>Piso</Text>
+                                        <Text type='primary' className={styles.textprimary}>Número</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.address?.floor ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.address?.number ?? noInformation}</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='primary' className={styles.textprimary}>Código Postal</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.address?.postalCode ?? noInformation}</Text>
+                                    </Row>
+                                </Col>
+                                <Col span={8}>
+                                    <Row>
+                                        <Text type='primary' className={styles.textprimary}>Localidad</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.address?.locality ?? noInformation}</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='primary' className={styles.textprimary}>Piso</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.address?.floor ?? noInformation}</Text>
                                     </Row>
                                 </Col>
                             </Row>
                             <Row justify='end'>
-                                <Button type="primary" onClick={() => setIsEditing(true)}>Editar</Button>
+                                <Button type="primary" className={styles.buttonprimary} onClick={() => setIsEditing(true)}>Editar</Button>
                             </Row>
                         </>
                         :

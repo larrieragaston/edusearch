@@ -6,6 +6,7 @@ import userService from '../../services/user';
 import { UserContext } from '../../contexts/userContext';
 import errorMessage from '../../utils/errorMessage'
 import { toast } from 'react-toastify'
+import styles from './account.module.css';
 
 const { Text, Title } = Typography;
 
@@ -43,15 +44,15 @@ export default function AccountSettings() {
     return (
         <React.Fragment>
             <Row justify='center'>
-                <Title level={3}>Configuracion de la Cuenta</Title>
+                <Title level={3} className={styles.sectiontitle}>Configuracion de la Cuenta</Title>
             </Row>
             <Row justify='center'>
-                <Text type='secondary'>Información básica, como tu nombre y foto, que verán las Universidades al momento de tu postulación</Text>
+                <Text type='secondary' className={styles.sectionsubtitle}>Información básica, como tu nombre y foto, que verán las Universidades al momento de tu postulación</Text>
             </Row>
             <Row justify='center'>
-                <Card style={{ width: '80%' }}>
+                <Card style={{ width: '80%'}} bodyStyle={{ padding: '15px 35px', borderRadius: '5px', boxShadow: '0px 7px 6px rgb(0 0 0 / 7%)' }}>
                     <Row>
-                        <Title level={5}>Información Básica</Title>
+                        <Title level={5} className={styles.insidetitle}>Información Básica</Title>
                     </Row>
                     {!isEditing ?
                         <>
@@ -66,37 +67,37 @@ export default function AccountSettings() {
                                 </Col>
                                 <Col span={14}>
                                     <Row>
-                                        <Text type='primary'>Nombre/es</Text>
+                                        <Text type='primary' className={styles.textprimary}>Nombre/es</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.firstName ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.firstName ?? noInformation}</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='primary'>Apellido/s</Text>
+                                        <Text type='primary' className={styles.textprimary}>Apellido/s</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.lastName ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.lastName ?? noInformation}</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='primary'>Correo electrónico</Text>
+                                        <Text type='primary' className={styles.textprimary}>Correo electrónico</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>{data?.email ?? noInformation}</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>{data?.email ?? noInformation}</Text>
                                     </Row>
                                     <Row>
                                         <Checkbox disabled checked={data?.hasNotificationsEnabled ?? false} />
-                                        <Text type='secondary'>Quiero recibir noitificaciones por correo</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>Quiero recibir noitificaciones por correo</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='primary'>Contraseña</Text>
+                                        <Text type='primary' className={styles.textprimary}>Contraseña</Text>
                                     </Row>
                                     <Row>
-                                        <Text type='secondary'>********</Text>
+                                        <Text type='secondary' className={styles.textsecondary}>********</Text>
                                     </Row>
                                 </Col>
                             </Row>
                             <Row justify='end'>
-                                <Button type="primary" onClick={() => setIsEditing(true)}>Editar</Button>
+                                <Button type="primary" className={styles.buttonprimary} onClick={() => setIsEditing(true)}>Editar</Button>
                             </Row>
                         </>
                         :

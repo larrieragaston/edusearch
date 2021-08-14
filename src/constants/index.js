@@ -83,6 +83,36 @@ export const roles = {
   UHumanResources: 'UHumanResources',
 }
 
+export const resumeSectionsEnum = [
+  'Degree',
+  'FurtherTraining',
+  'Scholarship',
+  'TeachingBackground',
+  'ManagementBackground',
+  'ResearchBackground',
+  'HRBackground',
+  'EvaluationBackground',
+  'STBackground',
+  'AcademicProduction',
+  'Award',
+  'Other'
+]
+
+export const resumeSections = {
+  Degree: 'Degree',
+  FurtherTraining: 'FurtherTraining',
+  Scholarship: 'Scholarship',
+  TeachingBackground: 'TeachingBackground',
+  ManagementBackground: 'ManagementBackground',
+  ResearchBackground: 'ResearchBackground',
+  HRBackground: 'HRBackground',
+  EvaluationBackground: 'EvaluationBackground',
+  STBackground: 'STBackground',
+  AcademicProduction: 'AcademicProduction',
+  Award: 'Award',
+  Other: 'Other'
+}
+
 export const countries = countriesList
 
 export const provinces = provincesList
