@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Typography, Button, Divider, Tabs, Steps, List, Modal } from 'antd'
 import logoSrc from '../../assets/logo.png'
 import { HeartOutlined, DownloadOutlined } from '@ant-design/icons'
-import { contestSteps, noInformation } from '../../constants'
+import { contestSteps, noInformation, periodTypes } from '../../constants'
 import contestService from '../../services/contest'
 import postulationService from '../../services/postulation'
 import moment from 'moment'
@@ -22,6 +22,10 @@ export default function ContestDetails(props) {
         }
         fetchData()
     }, [props.id])
+
+    const getPeriodType = (type) => {
+        return periodTypes.filter(x => x.value == type)[0]?.description ?? null
+      }
 
     const getSteps = (hasColloquium) => {
         if (hasColloquium)
@@ -83,7 +87,7 @@ export default function ContestDetails(props) {
                     </Row>
                     <Row>
                         <HeartOutlined />
-                        <Text>Periodo {data.periodType ?? noInformation}</Text>
+                        <Text>Periodo {getPeriodType(data?.subject?.periodType) ?? noInformation}</Text>
                     </Row>
                     <Row>
                         <HeartOutlined />

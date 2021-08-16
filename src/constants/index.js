@@ -88,3 +88,9 @@ export const situationTypes = [
   { value: "Current", description: "En proceso" },
   { value: "Quit", description: "Abandonó" },
 ];
+
+export const periodTypes = [
+  { value: "Yearly", description: "Anual" },
+  { value: "Quarterly", description: "Cuatrimestral" },
+  { value: "Bimonthly", description: "Bimerstral" },
+];

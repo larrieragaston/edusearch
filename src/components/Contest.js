@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Row, Col, Typography, Button, Divider, Modal } from "antd";
 import logoSrc from "../assets/logo.png";
 import { HeartOutlined, HeartFilled, ExclamationCircleOutlined } from "@ant-design/icons";
-import { noInformation } from "../constants";
+import { noInformation, periodTypes } from "../constants";
 import moment from "moment";
 import { navigate } from "@reach/router";
 import postulationService from "../services/postulation";
@@ -12,6 +12,10 @@ const { confirm } = Modal;
 
 export default function Contest({ data }) {
   const [hasPostulation, setHasPostulation] = useState(data?.hasPostulation);
+
+  const getPeriodType = (type) => {
+    return periodTypes.filter(x => x.value == type)[0]?.description ?? null
+  }
 
   function showConfirm(contestId) {
     confirm({
@@ -87,7 +91,7 @@ export default function Contest({ data }) {
       </Row>
       <Row>
         <HeartOutlined />
-        <Text>Periodo {data?.subject?.periodType ?? noInformation}</Text>
+        <Text>Periodo {getPeriodType(data?.subject?.periodType) ?? noInformation}</Text>
       </Row>
       <Row>
         <HeartOutlined />
