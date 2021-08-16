@@ -38,6 +38,10 @@ export default function ResumeSection(props) {
   const [type, setType] = useState(props.data?.sectionType);
   const { userData, setUserData } = useContext(UserContext);
 
+  const getDegreeType = (type) => {
+    return degreeTypes.filter(x => x.value == type)[0]?.description ?? null
+  }
+
   const showModal = (sectionData) => {
     setModalData(sectionData);
     if (sectionData) setDegreeId(sectionData._id);
@@ -243,7 +247,7 @@ export default function ResumeSection(props) {
         <Col span={20}>
           {activeFields.subType ? (
             <Row>
-              <Text>{sectionData?.subType}</Text>
+              <Text>{getDegreeType(sectionData?.subType)}</Text>
             </Row>
           ) : (
             <></>
