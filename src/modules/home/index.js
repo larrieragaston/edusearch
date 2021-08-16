@@ -29,8 +29,8 @@ export default function Home() {
             <Row justify='start'>
                 <DashboardNumber data={{ quantity: 4, type: 'NEW_CONTESTS' }} />
                 <DashboardNumber data={{ quantity: '80%', type: 'PERSONAL_DATA_COMPLETED' }} />
-                <DashboardNumber data={{ quantity: 1, type: 'NEW_CONTESTS' }} />
-                <DashboardNumber data={{ quantity: 1, type: 'NEW_CONTESTS' }} />
+                <DashboardNumber data={{ quantity: 1, type: 'ACTIVE_APPLICATIONS' }} />
+                <DashboardNumber data={{ quantity: 1, type: 'FAVOURITE_TO_EXPIRE' }} />
             </Row>
             <Row>
                 <Text style={{ fontSize: '20px' }}>Busquedas Activas({contestsCount})</Text>

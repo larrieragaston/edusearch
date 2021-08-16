@@ -1,8 +1,8 @@
 import React from 'react'
-import { Card, Row, Typography } from 'antd'
+import { Card, Typography } from 'antd'
 import { dashboardCardTypes } from '../constants'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 export default function DashboardNumber({ data }) {
 
