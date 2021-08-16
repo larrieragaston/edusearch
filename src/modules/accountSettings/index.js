@@ -26,8 +26,8 @@ export default function AccountSettings() {
         const payload = { ...values }
         try {
             const response = await userService.updateUserByToken(payload)
-            setUserData(response.user)
-            setData(response.user)
+            setUserData(response)
+            setData(response)
         } catch (e) {
             const message = errorMessage(e)
             toast.error(message)

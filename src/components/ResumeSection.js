@@ -11,7 +11,12 @@ import {
   InputNumber,
   Modal,
 } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import {
   resumeSections,
   noInformationSection,
@@ -27,7 +32,6 @@ const { confirm } = Modal;
 
 export default function ResumeSection(props) {
   const [visible, setVisible] = useState(false);
-//   const [visibleConfirmation, setVisibleConfirmation] = useState(false);
   const [modalData, setModalData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [degreeId, setDegreeId] = useState(0);
@@ -36,37 +40,32 @@ export default function ResumeSection(props) {
 
   const showModal = (sectionData) => {
     setModalData(sectionData);
-    if(sectionData)
-        setDegreeId(sectionData._id)
+    if (sectionData) setDegreeId(sectionData._id);
     setVisible(true);
   };
-  
-//   const showConfirmationModal = (sectionData) => {
-//     setDegreeId(sectionData._id)
-//     setVisibleConfirmation(true);
-//   };
 
   function showConfirm(sectionData) {
     confirm({
-      title: 'Esta seguro que desea eliminar este item?',
+      title: "Esta seguro que desea eliminar este item?",
       icon: <ExclamationCircleOutlined />,
-      content: 'Si lo elimina, no podra revertirlo',
-      okText: 'Confirmar',
-      okType: 'danger',
-      cancelText: 'Cancelar',
+      content: "Si lo elimina, no podra revertirlo",
+      okText: "Confirmar",
+      okType: "danger",
+      cancelText: "Cancelar",
       async onOk() {
-            console.log('Confirmar');
-            try{
-              await degreeService.deleteDegree(sectionData._id);
-              let degrees = userData.professionalInformation.filter(x => x._id !== sectionData._id);
-              setUserData({ ...userData, professionalInformation: degrees });
-            }
-            catch (e) {
-                console.log(e);
-              }
+        console.log("Confirmar");
+        try {
+          await degreeService.deleteDegree(sectionData._id);
+          let degrees = userData.professionalInformation.filter(
+            (x) => x._id !== sectionData._id
+          );
+          setUserData({ ...userData, professionalInformation: degrees });
+        } catch (e) {
+          console.log(e);
+        }
       },
       onCancel() {
-        console.log('Cancelar');
+        console.log("Cancelar");
       },
     });
   }
@@ -75,17 +74,18 @@ export default function ResumeSection(props) {
     setIsSubmitting(true);
     const payload = { ...values, type };
     try {
-        if(degreeId){
-            const response = await degreeService.putDegree(degreeId, payload)
-            let degrees = userData.professionalInformation.map(x => x._id === degreeId ? response : x)
-            setUserData({ ...userData, professionalInformation: degrees})
-        }
-        else {
-            const response = await degreeService.postDegree(payload)
-            let degrees = userData.professionalInformation
-            degrees.push(response)
-            setUserData({ ...userData, professionalInformation: degrees})
-        }
+      if (degreeId) {
+        const response = await degreeService.putDegree(degreeId, payload);
+        let degrees = userData.professionalInformation.map((x) =>
+          x._id === degreeId ? response : x
+        );
+        setUserData({ ...userData, professionalInformation: degrees });
+      } else {
+        const response = await degreeService.postDegree(payload);
+        let degrees = userData.professionalInformation;
+        degrees.push(response);
+        setUserData({ ...userData, professionalInformation: degrees });
+      }
     } catch (e) {
       console.log(e);
     } finally {
@@ -299,7 +299,7 @@ export default function ResumeSection(props) {
         </Col>
         <Col span={4}>
           <EditOutlined onClick={() => showModal(sectionData)} />
-          <DeleteOutlined onClick={() => showConfirm(sectionData)}/>
+          <DeleteOutlined onClick={() => showConfirm(sectionData)} />
         </Col>
       </>
     );
@@ -510,21 +510,8 @@ export default function ResumeSection(props) {
       <Modal
         title={getSectionTitle(props.data?.sectionType)}
         visible={visible}
-        // onOk={createOrUpdate}
         onCancel={cancelCreateOrUpdate}
-        // footer={[
-        //   <Button key="back" onClick={() => cancelCreateOrUpdate()}>
-        //     Cancelar
-        //   </Button>,
-        //   <Button
-        //     key="submit"
-        //     type="primary"
-        //     loading={isSubmitting}
-        //     onClick={() => createOrUpdate()}
-        //   >
-        //     Guardar cambios
-        //   </Button>,
-        // ]}
+        footer={null}
       >
         {getModalBody(props.data?.sectionType, modalData)}
       </Modal>
