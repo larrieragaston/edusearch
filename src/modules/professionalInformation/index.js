@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Card, Row, Col, Typography, Button, Form, Input, DatePicker, Select, InputNumber, Divider } from 'antd';
+import { Row, Typography } from 'antd';
 import { UserContext } from '../../contexts/userContext';
 import ResumeSection from '../../components/ResumeSection';
 import { resumeSectionsEnum } from '../../constants';
@@ -8,8 +8,6 @@ const { Text, Title } = Typography;
 
 export default function ProfessionalInformation() {
     const [data, setData] = useState({})
-    const [isEditing, setIsEditing] = useState(false)
-    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const { userData, setUserData } = useContext(UserContext)
 
@@ -18,7 +16,7 @@ export default function ProfessionalInformation() {
     }, [userData])
 
     const getSectionData = (sectionType) => {
-        const sectionData = data?.professionalInformation?.filter(x => x.type == sectionType)
+        const sectionData = data?.professionalInformation?.filter(x => x.type === sectionType)
         return { sectionType: sectionType, sectionData: sectionData }
     }
 

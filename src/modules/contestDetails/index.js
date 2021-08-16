@@ -55,7 +55,7 @@ export default function ContestDetails(props) {
     const postulate = async (contestId) => {
         try {
             const payload = { contest: contestId }
-            const response = await postulationService.postulate(payload)
+            await postulationService.postulate(payload)
             success()
         } catch (e) {
             // const message = errorMessage(e)
