@@ -1,23 +1,29 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Typography, Button, Divider, Modal } from "antd";
 import logoSrc from "../assets/logo.png";
-import { HeartOutlined, HeartFilled, ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  HeartOutlined,
+  HeartFilled,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import { noInformation, periodTypes } from "../constants";
 import moment from "moment";
 import { navigate } from "@reach/router";
 import postulationService from "../services/postulation";
+import favouriteService from "./../services/favourite";
 
 const { Text } = Typography;
 const { confirm } = Modal;
 
 export default function Contest({ data }) {
   const [hasPostulation, setHasPostulation] = useState(data?.hasPostulation);
+  const [isFavourite, setIsFavourite] = useState(data?.isFavourite);
 
   const getPeriodType = (type) => {
-    return periodTypes.filter(x => x.value == type)[0]?.description ?? null
-  }
+    return periodTypes.filter((x) => x.value == type)[0]?.description ?? null;
+  };
 
-  function showConfirm(contestId) {
+  function showConfirmPostulation(contestId) {
     confirm({
       title: "Esta seguro que desea postularse?",
       icon: <ExclamationCircleOutlined />,
@@ -55,6 +61,37 @@ export default function Contest({ data }) {
     });
   }
 
+  const saveFavourite = async (contestId) => {
+    console.log("saveFavourite");
+    try {
+      const payload = { contest: contestId };
+      await favouriteService.save(payload);
+      setIsFavourite(true)
+      Modal.success({
+        title: "Se ha guardado correctamente!",
+      });
+    } catch (e) {
+      Modal.error({
+        title: "No se ha guardar el elemento como favoritos!",
+      });
+    }
+  };
+
+  const deleteFavourite = async (contestId) => {
+    console.log("saveFavourite");
+    try {
+      await favouriteService.deleteFavourite(contestId);
+      setIsFavourite(false)
+      Modal.success({
+        title: "Se ha borrado correctamente!",
+      });
+    } catch (e) {
+      Modal.error({
+        title: "No se ha podido quitar el elemento de sus favoritos!",
+      });
+    }
+  };
+
   return (
     <Card size="small" style={{ width: 300 }}>
       <Row>
@@ -73,8 +110,11 @@ export default function Contest({ data }) {
         </Col>
       </Row>
       <Row>
-        <HeartFilled style={{ color: "#e01616", fontSize: 20 }} />
-        {/* <HeartOutlined style={{fontSize: 20}}/> */}
+        {isFavourite ? (
+          <HeartFilled style={{ color: "#e01616", fontSize: 20 }} onClick={() => deleteFavourite(data._id)} />
+        ) : (
+          <HeartOutlined style={{ fontSize: 20 }} onClick={() => saveFavourite(data._id)}/>
+        )}
       </Row>
       <Row>
         <Text strong>{data?.subject?.name ?? noInformation}</Text>
@@ -91,7 +131,9 @@ export default function Contest({ data }) {
       </Row>
       <Row>
         <HeartOutlined />
-        <Text>Periodo {getPeriodType(data?.subject?.periodType) ?? noInformation}</Text>
+        <Text>
+          Periodo {getPeriodType(data?.subject?.periodType) ?? noInformation}
+        </Text>
       </Row>
       <Row>
         <HeartOutlined />
@@ -106,7 +148,10 @@ export default function Contest({ data }) {
             Postulado
           </Button>
         ) : (
-          <Button type="primary" onClick={() => showConfirm(data._id)}>
+          <Button
+            type="primary"
+            onClick={() => showConfirmPostulation(data._id)}
+          >
             Postularme
           </Button>
         )}
