@@ -115,7 +115,7 @@ export default function Contest({ data }) {
         {isFavourite ? (
           <HeartFilled style={{ color: "#e01616", fontSize: 20, paddingTop: '0.3em', paddingBottom: '0.4em', paddingLeft: '0.2em' }} onClick={() => deleteFavourite(data._id)} />
         ) : (
-          <HeartOutlined style={{ fontSize: 20, paddingTop: '0.3em', paddingBottom: '0.4em', paddingLeft: '0.2em' }} onClick={() => saveFavourite(data._id)} />
+          <HeartOutlined style={{ color: '#0262CF', fontSize: 20, paddingTop: '0.3em', paddingBottom: '0.4em', paddingLeft: '0.2em' }} onClick={() => saveFavourite(data._id)} />
         )}
       </Row>
       <Row>
@@ -125,7 +125,7 @@ export default function Contest({ data }) {
         <hr style={{ border: '1px solid #0262CF', marginTop: '0' }} />
       </Col>
       <Row style={{ paddingTop: '1em', alignItems: 'center' }}>
-        <ClockCircleOutlined style={{ paddingLeft: '0.3em', paddingRight: '0.5em' }} />
+        <ClockCircleOutlined style={{ color: '#0262CF', paddingLeft: '0.3em', paddingRight: '0.5em' }} />
         <Text>
           {data?.day ?? noInformation} -{" "}
           {data?.startsAt || data?.endsAt
@@ -134,13 +134,13 @@ export default function Contest({ data }) {
         </Text>
       </Row>
       <Row style={{ alignItems: 'center' }}>
-        <CalendarOutlined style={{ paddingLeft: '0.3em', paddingRight: '0.5em' }} />
+        <CalendarOutlined style={{ color: '#0262CF', paddingLeft: '0.3em', paddingRight: '0.5em' }} />
         <Text>
           Periodo {getPeriodType(data?.subject?.periodType) ?? noInformation}
         </Text>
       </Row>
       <Row style={{ paddingBottom: '1em', alignItems: 'center' }} >
-        <ApartmentOutlined style={{ paddingLeft: '0.3em', paddingRight: '0.5em' }} />
+        <ApartmentOutlined style={{ color: '#0262CF', paddingLeft: '0.3em', paddingRight: '0.5em' }} />
         <Text>{data?.university?.name ?? noInformation}</Text>
       </Row>
       <Row justify="end">
