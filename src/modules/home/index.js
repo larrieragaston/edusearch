@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Row, Typography } from 'antd';
 import contestService from '../../services/contest';
 import Contest from '../../components/Contest'
 import DashboardNumber from '../../components/DashboardNumber'
 import WelcomeTitle from '../../components/WelcomeTitle'
 import { noInformation } from '../../constants';
+import { UserContext } from '../../contexts/userContext';
 
 const { Text } = Typography
 
 export default function Home() {
     const [contests, setContests] = useState([])
     const [contestsCount, setContestsCount] = useState(0)
+    const [data, setData] = useState({})
+
+    const { userData, setUserData } = useContext(UserContext)
+
+    useEffect(() => {
+        setData(userData)
+    }, [userData])
 
     useEffect(() => {
         async function fetchData() {
@@ -21,10 +29,11 @@ export default function Home() {
         fetchData()
     }, [])
 
+
     return (
         <React.Fragment>
             <Row>
-                <WelcomeTitle data={{ name: 'Gastón' }} />
+                <WelcomeTitle data={data} />
             </Row>
             <Row style={{paddingBottom:'2em'}}>
                 <DashboardNumber data={{ quantity: 4, type: 'NEW_CONTESTS' }} />
