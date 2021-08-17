@@ -23,6 +23,9 @@ export default function Contests(props) {
         case contestTypes.favourites:
           contestForUser = await contestService.getFavouriteContest();
           break;
+        default:
+          contestForUser = null;
+          break;
       }
       setContests(contestForUser);
       setContestsCount(contestForUser.length);
@@ -38,14 +41,23 @@ export default function Contests(props) {
         return "Postulacones";
       case contestTypes.favourites:
         return "Favoritos";
+      default:
+        return "Error";
     }
   };
 
   return (
     <React.Fragment>
       <Row>
-        <Text style={{ fontSize: "20px" }}>
-          {getPageTitle(props.type)}({contestsCount})
+        <Text
+          style={{
+            fontSize: "20px",
+            color: "#0262CF",
+            paddingBottom: "0.9em",
+            paddingTop: "0.9em",
+          }}
+        >
+          {getPageTitle(props.type)} ({contestsCount})
         </Text>
       </Row>
       <Row>

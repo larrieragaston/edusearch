@@ -39,7 +39,7 @@ export default function ResumeSection(props) {
   const { userData, setUserData } = useContext(UserContext);
 
   const getDegreeType = (type) => {
-    return degreeTypes.filter(x => x.value == type)[0]?.description ?? null
+    return degreeTypes.filter(x => x.value === type)[0]?.description ?? null
   }
 
   const showModal = (sectionData) => {

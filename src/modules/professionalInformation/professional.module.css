@@ -1,0 +1,17 @@
+.sectiontitle {
+	margin-top: 30px !important;
+	color: #0262cf !important;
+	font-family: "Montserrat", sans-serif !important;
+	font-size: 26px !important;
+	font-weight: 400 !important;
+}
+
+.sectionsubtitle {
+	margin-top: -10px !important;
+	margin-bottom: 25px !important;
+	color: #666666 !important;
+	font-family: "Montserrat", sans-serif !important;
+	font-size: 14px !important;
+	font-weight: 400 !important;
+	font-style: italic !important;
+}

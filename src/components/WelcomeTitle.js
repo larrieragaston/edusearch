@@ -3,8 +3,8 @@ import { Typography } from 'antd';
 const { Text } = Typography;
 
 
-export default function WelcomeTitle({ data }) {
+export default function WelcomeTitle(props) {
     return (
-        <Text style={{ fontSize: '20px' }}>¡Hola <Text strong style={{ color: 'blue' }}>{data.name}</Text>!</Text>
+        <Text style={{ fontSize: '26px', paddingTop: '0.5em'  }}>¡Hola, <Text strong style={{ color: '#0262CF' }}>{props.data.firstName}</Text>!</Text>
     )
 }

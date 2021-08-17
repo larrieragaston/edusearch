@@ -24,8 +24,8 @@ export default function DashboardNumber({ data }) {
     }
 
     return (
-        <Card style={{ width: '16em', margin: '0.5em', borderRadius: '5px', textAlign: 'center', }} bodyStyle={{padding: '15px'}}>
-            <Title level={2} style={{ color: 'blue', marginBottom: '0.2em' }}>{data.quantity}</Title>
+        <Card style={{ width: '16em', margin: '0.5em', borderRadius: '5px', textAlign: 'center', boxShadow: '0px 7px 6px rgb(0 0 0 / 7%)' }} bodyStyle={{padding: '10px'}}>
+            <Title level={2} style={{ color: '#0262cf', marginBottom: '0.2em' }}>{data.quantity}</Title>
             <p style={{lineHeight: '20px'}}>{getCardText(data.type)}</p>
         </Card>
     )

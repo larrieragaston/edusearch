@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Card, Row, Col, Typography, Button, Divider, Modal } from "antd";
-import logoSrc from "../assets/logo.png";
+import { Card, Row, Col, Typography, Button, Modal } from "antd";
+// import logoSrc from "../assets/logo.png";
 import uadeSrc from "../assets/uade.png";
-import udesaSrc from "../assets/udesa.png";
+// import udesaSrc from "../assets/udesa.png";
 import {
   HeartOutlined,
   HeartFilled,
@@ -25,7 +25,7 @@ export default function Contest({ data }) {
   const [isFavourite, setIsFavourite] = useState(data?.isFavourite);
 
   const getPeriodType = (type) => {
-    return periodTypes.filter((x) => x.value == type)[0]?.description ?? null;
+    return periodTypes.filter((x) => x.value === type)[0]?.description ?? null;
   };
 
   function showConfirmPostulation(contestId) {
@@ -98,7 +98,7 @@ export default function Contest({ data }) {
   };
 
   return (
-    <Card style={{ width: '25em', margin: '0.5em', borderRadius: '5px' }} bodyStyle={{ padding: '15px' }}>
+    <Card style={{ width: '25em', margin: '0.5em', borderRadius: '5px', boxShadow: '0px 7px 6px rgb(0 0 0 / 7%)' }} bodyStyle={{ padding: '15px' }}>
       <Row>
         <Col span={12}>
           <Text type="secondary" style={{ fontSize: '14px' }}> Fecha de finalización: <br /> {data?.dueDate
