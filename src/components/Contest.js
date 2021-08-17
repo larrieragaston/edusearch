@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Typography, Button, Divider, Modal } from "antd";
 import logoSrc from "../assets/logo.png";
+import uadeSrc from "../assets/uade.png";
+import udesaSrc from "../assets/udesa.png";
 import {
   HeartOutlined,
   HeartFilled,
   ExclamationCircleOutlined,
+  ClockCircleOutlined,
+  CalendarOutlined,
+  ApartmentOutlined
 } from "@ant-design/icons";
 import { noInformation, periodTypes } from "../constants";
 import moment from "moment";
@@ -93,35 +98,34 @@ export default function Contest({ data }) {
   };
 
   return (
-    <Card size="small" style={{ width: 300 }}>
+    <Card style={{ width: '25em', margin: '0.5em', borderRadius: '5px' }} bodyStyle={{ padding: '15px' }}>
       <Row>
         <Col span={12}>
-          <Text type="secondary"> Fecha de Finalización:</Text>
-          <Text type="secondary">
-            {data?.dueDate
-              ? moment(data.dueDate, "YYYY-MM-DDT00:00:00.000+00:00").format(
-                  "DD-MM-YYYY"
-                )
-              : noInformation}
-          </Text>
+          <Text type="secondary" style={{ fontSize: '14px' }}> Fecha de finalización: <br /> {data?.dueDate
+            ? moment(data.dueDate, "YYYY-MM-DDT00:00:00.000+00:00").format(
+              "DD-MM-YYYY"
+            )
+            : noInformation}</Text>
         </Col>
-        <Col span={12}>
-          <img alt={"logo-EduSearch"} src={logoSrc} />
+        <Col span={10} offset={2}>
+          <img alt={"logo-uade"} src={uadeSrc} style={{ maxWidth: '9em' }} />
         </Col>
       </Row>
       <Row>
         {isFavourite ? (
-          <HeartFilled style={{ color: "#e01616", fontSize: 20 }} onClick={() => deleteFavourite(data._id)} />
+          <HeartFilled style={{ color: "#e01616", fontSize: 20, paddingTop: '0.3em', paddingBottom: '0.4em', paddingLeft: '0.2em' }} onClick={() => deleteFavourite(data._id)} />
         ) : (
-          <HeartOutlined style={{ fontSize: 20 }} onClick={() => saveFavourite(data._id)}/>
+          <HeartOutlined style={{ fontSize: 20, paddingTop: '0.3em', paddingBottom: '0.4em', paddingLeft: '0.2em' }} onClick={() => saveFavourite(data._id)} />
         )}
       </Row>
       <Row>
-        <Text strong>{data?.subject?.name ?? noInformation}</Text>
+        <Text style={{ fontSize: '20px' }} strong>{data?.subject?.name ?? noInformation}</Text>
       </Row>
-      <Divider />
-      <Row>
-        <HeartOutlined />
+      <Col span={6}>
+        <hr style={{ border: '1px solid #0262CF', marginTop: '0' }} />
+      </Col>
+      <Row style={{ paddingTop: '1em', alignItems: 'center' }}>
+        <ClockCircleOutlined style={{ paddingLeft: '0.3em', paddingRight: '0.5em' }} />
         <Text>
           {data?.day ?? noInformation} -{" "}
           {data?.startsAt || data?.endsAt
@@ -129,14 +133,14 @@ export default function Contest({ data }) {
             : noInformation}
         </Text>
       </Row>
-      <Row>
-        <HeartOutlined />
+      <Row style={{ alignItems: 'center' }}>
+        <CalendarOutlined style={{ paddingLeft: '0.3em', paddingRight: '0.5em' }} />
         <Text>
           Periodo {getPeriodType(data?.subject?.periodType) ?? noInformation}
         </Text>
       </Row>
-      <Row>
-        <HeartOutlined />
+      <Row style={{ paddingBottom: '1em', alignItems: 'center' }} >
+        <ApartmentOutlined style={{ paddingLeft: '0.3em', paddingRight: '0.5em' }} />
         <Text>{data?.university?.name ?? noInformation}</Text>
       </Row>
       <Row justify="end">
