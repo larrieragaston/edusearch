@@ -101,7 +101,7 @@ export default function MainLayout() {
                     </Menu.Item>
                 </Menu>
             </Sider>
-            <Layout className="site-layout">
+            <Layout className="site-layout" style={{ backgroundColor: '#F9F9F9' }}>
                 <Header className="site-layout-background" style={{ padding: '0', alignItems: 'center' }}>
                     <PageHeader
                         ghost={false}
