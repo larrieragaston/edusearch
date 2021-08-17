@@ -94,3 +94,9 @@ export const periodTypes = [
   { value: "Quarterly", description: "Cuatrimestral" },
   { value: "Bimonthly", description: "Bimerstral" },
 ];
+
+export const contestTypes = {
+  all: "all",
+  postulations: "postulations",
+  favourites: "favourites"
+}

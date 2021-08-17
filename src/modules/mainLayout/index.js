@@ -47,6 +47,7 @@ export default function MainLayout() {
             // setNavigation(navigationByRole[data?.user?.role])
             const response = await userService.getUserByToken()
             setUserData(response)
+            // navigate('/dashboard')
         }
     }, [])
 
@@ -75,7 +76,7 @@ export default function MainLayout() {
                     <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('/personal-information')}>
                         Datos Personales
                     </Menu.Item>
-                    <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('/professional-information')}>
+                    <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('/my-resume')}>
                         <Menu.Item key="3">Formación Superior y Media</Menu.Item>
                         <Menu.Item key="4">Formación Complementaria</Menu.Item>
                         <Menu.Item key="5">Becas</Menu.Item>
@@ -87,10 +88,10 @@ export default function MainLayout() {
                         <Menu.Item key="11">Producciones Académicas</Menu.Item>
                         <Menu.Item key="12">Premios</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos" onTitleClick={() => navigate('/contests-all')}>
-                        <Menu.Item key="13">Todos</Menu.Item>
-                        <Menu.Item key="14">Postulaciones</Menu.Item>
-                        <Menu.Item key="15">Favoritos</Menu.Item>
+                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos">
+                        <Menu.Item key="13" onClick={() => navigate('/contests/all')}>Todos</Menu.Item>
+                        <Menu.Item key="14" onClick={() => navigate('/contests/postulations')}>Postulaciones</Menu.Item>
+                        <Menu.Item key="15" onClick={() => navigate('/contests/favourites')}>Favoritos</Menu.Item>
                     </SubMenu>
                     <Menu.Item key="16" icon={<QuestionCircleOutlined />} onClick={() => navigate('/faq')}>
                         F.A.Q.
@@ -121,8 +122,8 @@ export default function MainLayout() {
                             <Home path="/dashboard" />
                             <AccountSettings path="/acccount-settings" />
                             <PersonalInformation path="/personal-information" />
-                            <ProfessionalInformation path="/professional-information" />
-                            <Contests path="/contests-all" />
+                            <ProfessionalInformation path="/my-resume" />
+                            <Contests path="/contests/:type" />
                             <ContestDetails path="/contest/:id" />
                             <FAQ path="/faq" />
                         </Router>
