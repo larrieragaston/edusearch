@@ -34,7 +34,7 @@ const fullHeight = { height: '100%' }
 //     { title: 'Usuarios', url: 'user-list' },
 //   ]
 
-export default function MainLayout() {
+export default function MainLayout(props) {
     const [collapsed, setCollapsed] = useState(false)
     const { userData, setUserData } = useContext(UserContext)
 
@@ -70,14 +70,14 @@ export default function MainLayout() {
             <Sider collapsible collapsed={collapsed} className="sider-content" width={280}>
                 <Menu defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="0" icon={<MoreOutlined />} onClick={() => setCollapsed(!collapsed)} />
-                    <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('/dashboard')}>
+                    <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('/')}>
                         Dashboard
                     </Menu.Item>
                     <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('/personal-information')}>
                         Datos Personales
                     </Menu.Item>
                     <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('/my-resume')}>
-                        <Menu.Item key="3">Formación Superior y Media</Menu.Item>
+                        <Menu.Item key="3" onClick={() => document.getElementById('joni')?.scrollIntoView({ block: 'start', behavior: 'smooth' })}>Formación Superior y Media</Menu.Item>
                         <Menu.Item key="4">Formación Complementaria</Menu.Item>
                         <Menu.Item key="5">Becas</Menu.Item>
                         <Menu.Item key="6">Formación Auitodidacta</Menu.Item>
@@ -118,15 +118,7 @@ export default function MainLayout() {
                 </Header>
                 <Content style={{ margin: '0 16px' }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                        <Router style={fullHeight}>
-                            <Home path="/dashboard" />
-                            <AccountSettings path="/acccount-settings" />
-                            <PersonalInformation path="/personal-information" />
-                            <ProfessionalInformation path="/my-resume" />
-                            <Contests path="/contests/:type" />
-                            <ContestDetails path="/contest/:id" />
-                            <FAQ path="/faq" />
-                        </Router>
+                        {props.children}
                     </div>
                 </Content>
             </Layout>

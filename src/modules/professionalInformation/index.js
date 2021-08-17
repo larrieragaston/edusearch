@@ -32,6 +32,8 @@ export default function ProfessionalInformation() {
             <Row justify='center'>
                 {resumeSectionsEnum.map(x => <ResumeSection data={getSectionData(x)} />)}
             </Row>
+            {/*// TODO Remove this*/}
+            <div id={"joni"}>HOLAAAAA</div>
         </React.Fragment>
     )
 }

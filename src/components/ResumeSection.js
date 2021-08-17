@@ -43,6 +43,7 @@ export default function ResumeSection(props) {
   }
 
   const showModal = (sectionData) => {
+    console.log('sectionData', sectionData)
     setModalData(sectionData);
     if (sectionData) setDegreeId(sectionData._id);
     setVisible(true);
@@ -74,7 +75,7 @@ export default function ResumeSection(props) {
     });
   }
 
-  const createOrUpdate = async (values) => {
+  const createOrUpdate = (id) => async (values) => {
     setIsSubmitting(true);
     const payload = { ...values, type };
     try {
@@ -239,12 +240,12 @@ export default function ResumeSection(props) {
     }
   };
 
-  const getSectionBody = (sectionType, sectionData) => {
+  const getSectionBody = (sectionType, sectionData, showModalParam) => {
     const activeFields = getSectionFields(sectionType);
 
     return (
       <>
-        <Col span={20}>
+        <Col span={20} style={{ marginBottom: '20px'}}>
           {activeFields.subType ? (
             <Row>
               <Text>{getDegreeType(sectionData?.subType)}</Text>
@@ -302,7 +303,7 @@ export default function ResumeSection(props) {
           )}
         </Col>
         <Col span={4}>
-          <EditOutlined onClick={() => showModal(sectionData)} />
+          <EditOutlined onClick={() => showModalParam(sectionData)} />
           <DeleteOutlined onClick={() => showConfirm(sectionData)} />
         </Col>
       </>
@@ -314,12 +315,13 @@ export default function ResumeSection(props) {
 
     return (
       <Form
+        key={sectionData?._id}
         layout="inline"
         name="basic"
         preserve={false}
         initialValues={sectionData}
         // preserve={false}
-        onFinish={createOrUpdate}
+        onFinish={createOrUpdate(sectionData?._id)}
         // onFinishFailed={onFinishFailed}
       >
         {activeFields.subType ? (
@@ -502,7 +504,7 @@ export default function ResumeSection(props) {
         {props.data?.sectionData?.length > 0 ? (
           <Row>
             {props.data.sectionData.map((x) =>
-              getSectionBody(props.data?.sectionType, x)
+              getSectionBody(props.data?.sectionType, x, showModal)
             )}
           </Row>
         ) : (
@@ -517,6 +519,7 @@ export default function ResumeSection(props) {
         onCancel={cancelCreateOrUpdate}
         footer={null}
       >
+        {console.log('modalData', modalData)}
         {getModalBody(props.data?.sectionType, modalData)}
       </Modal>
     </>
