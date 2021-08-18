@@ -1,19 +1,12 @@
 import React, { useState, useMemo, useContext } from 'react'
 import './mainLayout.css';
-import { navigate, Router } from '@reach/router'
+import { navigate } from '@reach/router'
 import logoSrc from '../../assets/logo.png'
 import { Layout, Menu, Avatar, Button, Popover, PageHeader, Tag } from 'antd';
 import { MoreOutlined, BarChartOutlined, ProfileOutlined, ContainerOutlined, UserOutlined, InfoCircleOutlined, BellOutlined, QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
-import Home from '../home'
-import AccountSettings from '../accountSettings'
-import ContestDetails from '../contestDetails'
-import Contests from '../contests'
-import PersonalInformation from '../personalInformation'
-import ProfessionalInformation from '../professionalInformation'
 import { UserContext } from '../../contexts/userContext';
 import userService from '../../services/user';
 import localStorage from '../../services/localStorage'
-import FAQ from '../faq';
 import styles from './mainLayout.css'
 
 const { Header, Content, Sider } = Layout;
@@ -34,7 +27,7 @@ const fullHeight = { height: '100%' }
 //     { title: 'Usuarios', url: 'user-list' },
 //   ]
 
-export default function MainLayout() {
+export default function MainLayout(props) {
     const [collapsed, setCollapsed] = useState(false)
     const { userData, setUserData } = useContext(UserContext)
 
@@ -118,15 +111,7 @@ export default function MainLayout() {
                 </Header>
                 <Content style={{ margin: '0 16px' }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                        <Router style={fullHeight}>
-                            <Home default />
-                            <AccountSettings path="/acccount-settings" />
-                            <PersonalInformation path="/personal-information" />
-                            <ProfessionalInformation path="/my-resume" />
-                            <Contests path="/contests/:type" />
-                            <ContestDetails path="/contest/:id" />
-                            <FAQ path="/faq" />
-                        </Router>
+                        {props.children}
                     </div>
                 </Content>
             </Layout>
