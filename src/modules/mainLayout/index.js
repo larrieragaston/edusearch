@@ -64,7 +64,7 @@ export default function MainLayout(props) {
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider collapsible collapsed={collapsed} className="sider-content" width={280}>
+            <Sider collapsible collapsed={collapsed} className="sider-content" width={300}>
                 <Menu defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="0" icon={<MoreOutlined />} onClick={() => setCollapsed(!collapsed)} />
                     <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('/')}>

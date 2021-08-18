@@ -66,7 +66,7 @@ export const resumeSections = [
   { key: "12", value: "STBackground", description: "Antecedentes en Ciencia y Tecnología", fieldsToShow: { title: true, institution: true, startYear: true, endYear: true, currentSituation: true } },
   { key: "13", value: "AcademicProduction", description: "Producciones Academicas", fieldsToShow: { title: true, institution: true, endYear: true, currentSituation: true } },
   { key: "14", value: "Award", description: "Premios", fieldsToShow: { title: true, institution: true, endYear: true, currentSituation: true } },
-  { key: "15", value: "Other", description: "Otros Antecedentes Profesionales Relevantes", fieldsToShow: { title: true, institution: true, startYear: true, endYear: true, currentSituation: true } }
+  { key: "15", value: "Other", description: "Otros Antecedentes Profesionales", fieldsToShow: { title: true, institution: true, startYear: true, endYear: true, currentSituation: true } }
 ];
 
 
