@@ -70,7 +70,7 @@ export default function MainLayout() {
             <Sider collapsible collapsed={collapsed} className="sider-content" width={280}>
                 <Menu defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="0" icon={<MoreOutlined />} onClick={() => setCollapsed(!collapsed)} />
-                    <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('/dashboard')}>
+                    <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('/')}>
                         Dashboard
                     </Menu.Item>
                     <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('/personal-information')}>
@@ -119,7 +119,7 @@ export default function MainLayout() {
                 <Content style={{ margin: '0 16px' }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                         <Router style={fullHeight}>
-                            <Home path="/dashboard" />
+                            <Home default />
                             <AccountSettings path="/acccount-settings" />
                             <PersonalInformation path="/personal-information" />
                             <ProfessionalInformation path="/my-resume" />

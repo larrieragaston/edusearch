@@ -28,7 +28,7 @@ export default function Contests(props) {
           break;
       }
       setContests(contestForUser);
-      setContestsCount(contestForUser.length);
+      setContestsCount(contestForUser?.length);
     }
     fetchData();
   }, [props.type]);
