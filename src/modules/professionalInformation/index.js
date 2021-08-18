@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Row, Typography } from 'antd';
 import { UserContext } from '../../contexts/userContext';
 import ResumeSection from '../../components/ResumeSection';
-import { resumeSectionsEnum } from '../../constants';
+import { resumeSections } from '../../constants';
 import styles from './professional.module.css';
 
 const { Text, Title } = Typography;
@@ -30,7 +30,7 @@ export default function ProfessionalInformation() {
                 <Text type='secondary' className={styles.sectionsubtitle}>Información sobre tu formacion académica y profesional.</Text>
             </Row>
             <Row justify='center'>
-                {resumeSectionsEnum.map(x => <ResumeSection data={getSectionData(x)} />)}
+                {resumeSections.map(x => <ResumeSection data={getSectionData(x.value)} />)}
             </Row>
         </React.Fragment>
     )

@@ -7,12 +7,11 @@ import { MoreOutlined, BarChartOutlined, ProfileOutlined, ContainerOutlined, Use
 import { UserContext } from '../../contexts/userContext';
 import userService from '../../services/user';
 import localStorage from '../../services/localStorage'
-import { resumeSections } from '../../constants'
+import { resumeSections } from './../../constants';
 import styles from './mainLayout.css'
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
-const fullHeight = { height: '100%' }
 
 // const navigationByRole = {
 //     [roles.Teacher]: teacherNavigation,
@@ -75,18 +74,7 @@ export default function MainLayout(props) {
                         Datos Personales
                     </Menu.Item>
                     <SubMenu key="3" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('/my-resume')}>
-                        <Menu.Item key="4" onClick={() => scrollTo(resumeSections.Degree)}>Formación Superior y Media</Menu.Item>
-                        <Menu.Item key="5" onClick={() => scrollTo(resumeSections.FurtherTraining)}>Formación Complementaria</Menu.Item>
-                        <Menu.Item key="6" onClick={() => scrollTo(resumeSections.Scholarship)}>Becas</Menu.Item>
-                        <Menu.Item key="7" onClick={() => scrollTo(resumeSections.TeachingBackground)}>Antecedentes en Docencia</Menu.Item>
-                        <Menu.Item key="8" onClick={() => scrollTo(resumeSections.ManagementBackground)}>Antecedentes en Gestión</Menu.Item>
-                        <Menu.Item key="9" onClick={() => scrollTo(resumeSections.ResearchBackground)}>Antecedentes en Investigación</Menu.Item>
-                        <Menu.Item key="10" onClick={() => scrollTo(resumeSections.HRBackground)}>Antecedentes en Formación y RRHH</Menu.Item>
-                        <Menu.Item key="11" onClick={() => scrollTo(resumeSections.EvaluationBackground)}>Antecedentes en Evaluación</Menu.Item>
-                        <Menu.Item key="12" onClick={() => scrollTo(resumeSections.STBackground)}>Antecedentes en Ciencia y Tecnología</Menu.Item>
-                        <Menu.Item key="13" onClick={() => scrollTo(resumeSections.AcademicProduction)}>Producciones Académicas</Menu.Item>
-                        <Menu.Item key="14" onClick={() => scrollTo(resumeSections.Award)}>Premios</Menu.Item>
-                        <Menu.Item key="15" onClick={() => scrollTo(resumeSections.Other)}>Otros Antecedentes Docentes</Menu.Item>
+                        {resumeSections.map(x => <Menu.Item key={x.key} onClick={() => scrollTo(x.value)}>{x.description}</Menu.Item>)}
                     </SubMenu>
                     <SubMenu key="16" icon={<ContainerOutlined />} title="Concursos">
                         <Menu.Item key="17" onClick={() => navigate('/contests/all')}>Todos</Menu.Item>
