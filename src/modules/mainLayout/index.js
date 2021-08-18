@@ -7,6 +7,7 @@ import { MoreOutlined, BarChartOutlined, ProfileOutlined, ContainerOutlined, Use
 import { UserContext } from '../../contexts/userContext';
 import userService from '../../services/user';
 import localStorage from '../../services/localStorage'
+import { resumeSections } from '../../constants'
 import styles from './mainLayout.css'
 
 const { Header, Content, Sider } = Layout;
@@ -58,6 +59,10 @@ export default function MainLayout(props) {
         </div>
     );
 
+    const scrollTo = (id) => {
+        return document.getElementById(id)?.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    }
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sider collapsible collapsed={collapsed} className="sider-content" width={280}>
@@ -69,27 +74,29 @@ export default function MainLayout(props) {
                     <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('/personal-information')}>
                         Datos Personales
                     </Menu.Item>
-                    <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('/my-resume')}>
-                        <Menu.Item key="3">Formación Superior y Media</Menu.Item>
-                        <Menu.Item key="4">Formación Complementaria</Menu.Item>
-                        <Menu.Item key="5">Becas</Menu.Item>
-                        <Menu.Item key="6">Formación Auitodidacta</Menu.Item>
-                        <Menu.Item key="7">Antecedentes en Docencia</Menu.Item>
-                        <Menu.Item key="8">Antecedentes en Gestión</Menu.Item>
-                        <Menu.Item key="9">Otros Antecedentes Docentes</Menu.Item>
-                        <Menu.Item key="10">Antecedentes Profesionales</Menu.Item>
-                        <Menu.Item key="11">Producciones Académicas</Menu.Item>
-                        <Menu.Item key="12">Premios</Menu.Item>
+                    <SubMenu key="3" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('/my-resume')}>
+                        <Menu.Item key="4" onClick={() => scrollTo(resumeSections.Degree)}>Formación Superior y Media</Menu.Item>
+                        <Menu.Item key="5" onClick={() => scrollTo(resumeSections.FurtherTraining)}>Formación Complementaria</Menu.Item>
+                        <Menu.Item key="6" onClick={() => scrollTo(resumeSections.Scholarship)}>Becas</Menu.Item>
+                        <Menu.Item key="7" onClick={() => scrollTo(resumeSections.TeachingBackground)}>Antecedentes en Docencia</Menu.Item>
+                        <Menu.Item key="8" onClick={() => scrollTo(resumeSections.ManagementBackground)}>Antecedentes en Gestión</Menu.Item>
+                        <Menu.Item key="9" onClick={() => scrollTo(resumeSections.ResearchBackground)}>Antecedentes en Investigación</Menu.Item>
+                        <Menu.Item key="10" onClick={() => scrollTo(resumeSections.HRBackground)}>Antecedentes en Formación y RRHH</Menu.Item>
+                        <Menu.Item key="11" onClick={() => scrollTo(resumeSections.EvaluationBackground)}>Antecedentes en Evaluación</Menu.Item>
+                        <Menu.Item key="12" onClick={() => scrollTo(resumeSections.STBackground)}>Antecedentes en Ciencia y Tecnología</Menu.Item>
+                        <Menu.Item key="13" onClick={() => scrollTo(resumeSections.AcademicProduction)}>Producciones Académicas</Menu.Item>
+                        <Menu.Item key="14" onClick={() => scrollTo(resumeSections.Award)}>Premios</Menu.Item>
+                        <Menu.Item key="15" onClick={() => scrollTo(resumeSections.Other)}>Otros Antecedentes Docentes</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos">
-                        <Menu.Item key="13" onClick={() => navigate('/contests/all')}>Todos</Menu.Item>
-                        <Menu.Item key="14" onClick={() => navigate('/contests/postulations')}>Postulaciones</Menu.Item>
-                        <Menu.Item key="15" onClick={() => navigate('/contests/favourites')}>Favoritos</Menu.Item>
+                    <SubMenu key="16" icon={<ContainerOutlined />} title="Concursos">
+                        <Menu.Item key="17" onClick={() => navigate('/contests/all')}>Todos</Menu.Item>
+                        <Menu.Item key="18" onClick={() => navigate('/contests/postulations')}>Postulaciones</Menu.Item>
+                        <Menu.Item key="19" onClick={() => navigate('/contests/favourites')}>Favoritos</Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="16" icon={<QuestionCircleOutlined />} onClick={() => navigate('/faq')}>
+                    <Menu.Item key="20" icon={<QuestionCircleOutlined />} onClick={() => navigate('/faq')}>
                         F.A.Q.
                     </Menu.Item>
-                    <Menu.Item key="17" icon={<LogoutOutlined />} onClick={() => logout()}>
+                    <Menu.Item key="21" icon={<LogoutOutlined />} onClick={() => logout()}>
                         Cerrar sesión
                     </Menu.Item>
                 </Menu>

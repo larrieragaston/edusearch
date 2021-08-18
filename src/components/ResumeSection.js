@@ -490,7 +490,7 @@ export default function ResumeSection(props) {
 
   return (
     <>
-      <Card style={{ width: "80%" }}>
+      <Card id={props.data?.sectionType} style={{ width: "80%" }}>
         <Row>
           <Col span={22}>
             <Title level={5}>{getSectionTitle(props.data?.sectionType)}</Title>
