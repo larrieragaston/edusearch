@@ -2,6 +2,13 @@ import React, { useMemo, useState } from 'react'
 import { Router } from '@reach/router'
 import Login from '../modules/login'
 import MainLayout from '../modules/mainLayout'
+import Home from "../modules/home";
+import AccountSettings from "../modules/accountSettings";
+import PersonalInformation from "../modules/personalInformation";
+import ProfessionalInformation from "../modules/professionalInformation";
+import Contests from "../modules/contests";
+import ContestDetails from "../modules/contestDetails";
+import FAQ from "../modules/faq";
 import { NotAuthorized, NotFound, ServerError } from '../modules/errors';
 import { UserContext } from '../contexts/userContext';
 
@@ -22,12 +29,17 @@ function Routes() {
       <Router style={fullHeight} path={`${process.env.PUBLIC_URL}/`}>
         {/* <Home path="/" /> */}
         <Login path="/login" />
-        <MainLayout path="/*" />
         {/* <Register path="/register" /> */}
         {/* <Forgot path="/forgot" /> */}
-        {/* <Dashboard path="/dashboard">
-        <EditUser path="/edit-user" />
-      </Dashboard> */}
+        <MainLayout path="/" >
+          <AccountSettings path="acccount-settings" />
+          <PersonalInformation path="personal-information" />
+          <ProfessionalInformation path="my-resume" />
+          <Contests path="contests/:type" />
+          <ContestDetails path="contest/:id" />
+          <FAQ path="faq" />
+          <Home default/>
+        </MainLayout>
 
         {/*ERRORES*/}
         <NotAuthorized path="/403" />

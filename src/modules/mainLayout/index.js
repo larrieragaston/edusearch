@@ -1,24 +1,17 @@
 import React, { useState, useMemo, useContext } from 'react'
 import './mainLayout.css';
-import { navigate, Router } from '@reach/router'
+import { navigate } from '@reach/router'
 import logoSrc from '../../assets/logo.png'
 import { Layout, Menu, Avatar, Button, Popover, PageHeader, Tag } from 'antd';
 import { MoreOutlined, BarChartOutlined, ProfileOutlined, ContainerOutlined, UserOutlined, InfoCircleOutlined, BellOutlined, QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
-import Home from '../home'
-import AccountSettings from '../accountSettings'
-import ContestDetails from '../contestDetails'
-import Contests from '../contests'
-import PersonalInformation from '../personalInformation'
-import ProfessionalInformation from '../professionalInformation'
 import { UserContext } from '../../contexts/userContext';
 import userService from '../../services/user';
 import localStorage from '../../services/localStorage'
-import FAQ from '../faq';
+import { resumeSections } from './../../constants';
 import styles from './mainLayout.css'
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
-const fullHeight = { height: '100%' }
 
 // const navigationByRole = {
 //     [roles.Teacher]: teacherNavigation,
@@ -34,7 +27,7 @@ const fullHeight = { height: '100%' }
 //     { title: 'Usuarios', url: 'user-list' },
 //   ]
 
-export default function MainLayout() {
+export default function MainLayout(props) {
     const [collapsed, setCollapsed] = useState(false)
     const { userData, setUserData } = useContext(UserContext)
 
@@ -65,38 +58,33 @@ export default function MainLayout() {
         </div>
     );
 
+    const scrollTo = (id) => {
+        return document.getElementById(id)?.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    }
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider collapsible collapsed={collapsed} className="sider-content" width={280}>
+            <Sider collapsible collapsed={collapsed} className="sider-content" width={300}>
                 <Menu defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="0" icon={<MoreOutlined />} onClick={() => setCollapsed(!collapsed)} />
-                    <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('/dashboard')}>
+                    <Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate('/')}>
                         Dashboard
                     </Menu.Item>
                     <Menu.Item key="2" icon={<UserOutlined />} onClick={() => navigate('/personal-information')}>
                         Datos Personales
                     </Menu.Item>
-                    <SubMenu key="sub1" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('/my-resume')}>
-                        <Menu.Item key="3">Formación Superior y Media</Menu.Item>
-                        <Menu.Item key="4">Formación Complementaria</Menu.Item>
-                        <Menu.Item key="5">Becas</Menu.Item>
-                        <Menu.Item key="6">Formación Auitodidacta</Menu.Item>
-                        <Menu.Item key="7">Antecedentes en Docencia</Menu.Item>
-                        <Menu.Item key="8">Antecedentes en Gestión</Menu.Item>
-                        <Menu.Item key="9">Otros Antecedentes Docentes</Menu.Item>
-                        <Menu.Item key="10">Antecedentes Profesionales</Menu.Item>
-                        <Menu.Item key="11">Producciones Académicas</Menu.Item>
-                        <Menu.Item key="12">Premios</Menu.Item>
+                    <SubMenu key="3" icon={<ProfileOutlined />} title="Mi CV" onTitleClick={() => navigate('/my-resume')}>
+                        {resumeSections.map(x => <Menu.Item key={x.key} onClick={() => scrollTo(x.value)}>{x.description}</Menu.Item>)}
                     </SubMenu>
-                    <SubMenu key="sub2" icon={<ContainerOutlined />} title="Concursos">
-                        <Menu.Item key="13" onClick={() => navigate('/contests/all')}>Todos</Menu.Item>
-                        <Menu.Item key="14" onClick={() => navigate('/contests/postulations')}>Postulaciones</Menu.Item>
-                        <Menu.Item key="15" onClick={() => navigate('/contests/favourites')}>Favoritos</Menu.Item>
+                    <SubMenu key="16" icon={<ContainerOutlined />} title="Concursos">
+                        <Menu.Item key="17" onClick={() => navigate('/contests/all')}>Todos</Menu.Item>
+                        <Menu.Item key="18" onClick={() => navigate('/contests/postulations')}>Postulaciones</Menu.Item>
+                        <Menu.Item key="19" onClick={() => navigate('/contests/favourites')}>Favoritos</Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="16" icon={<QuestionCircleOutlined />} onClick={() => navigate('/faq')}>
+                    <Menu.Item key="20" icon={<QuestionCircleOutlined />} onClick={() => navigate('/faq')}>
                         F.A.Q.
                     </Menu.Item>
-                    <Menu.Item key="17" icon={<LogoutOutlined />} onClick={() => logout()}>
+                    <Menu.Item key="21" icon={<LogoutOutlined />} onClick={() => logout()}>
                         Cerrar sesión
                     </Menu.Item>
                 </Menu>
@@ -118,15 +106,7 @@ export default function MainLayout() {
                 </Header>
                 <Content style={{ margin: '0 16px' }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                        <Router style={fullHeight}>
-                            <Home path="/dashboard" />
-                            <AccountSettings path="/acccount-settings" />
-                            <PersonalInformation path="/personal-information" />
-                            <ProfessionalInformation path="/my-resume" />
-                            <Contests path="/contests/:type" />
-                            <ContestDetails path="/contest/:id" />
-                            <FAQ path="/faq" />
-                        </Router>
+                        {props.children}
                     </div>
                 </Content>
             </Layout>

@@ -34,17 +34,15 @@ export default function ResumeSection(props) {
   const [visible, setVisible] = useState(false);
   const [modalData, setModalData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [degreeId, setDegreeId] = useState(0);
   const [type, setType] = useState(props.data?.sectionType);
   const { userData, setUserData } = useContext(UserContext);
 
   const getDegreeType = (type) => {
-    return degreeTypes.filter(x => x.value === type)[0]?.description ?? null
-  }
+    return degreeTypes.filter((x) => x.value === type)[0]?.description ?? null;
+  };
 
   const showModal = (sectionData) => {
     setModalData(sectionData);
-    if (sectionData) setDegreeId(sectionData._id);
     setVisible(true);
   };
 
@@ -74,14 +72,14 @@ export default function ResumeSection(props) {
     });
   }
 
-  const createOrUpdate = async (values) => {
+  const createOrUpdate = (id) => async (values) => {
     setIsSubmitting(true);
     const payload = { ...values, type };
     try {
-      if (degreeId) {
-        const response = await degreeService.putDegree(degreeId, payload);
+      if (id) {
+        const response = await degreeService.putDegree(id, payload);
         let degrees = userData.professionalInformation.map((x) =>
-          x._id === degreeId ? response : x
+          x._id === id ? response : x
         );
         setUserData({ ...userData, professionalInformation: degrees });
       } else {
@@ -103,140 +101,13 @@ export default function ResumeSection(props) {
   };
 
   const getSectionTitle = (sectionType) => {
-    switch (sectionType) {
-      case resumeSections.Degree:
-        return "Formación superior y media";
-      case resumeSections.FurtherTraining:
-        return "Formacion complementaria";
-      case resumeSections.Scholarship:
-        return "Becas";
-      case resumeSections.TeachingBackground:
-        return "Antecedentes en docencia";
-      case resumeSections.ManagementBackground:
-        return "Antecedentes en gestión";
-      case resumeSections.ResearchBackground:
-        return "Antecedentes en investigación";
-      case resumeSections.HRBackground:
-        return "Antecedentes en formación y RRHH";
-      case resumeSections.EvaluationBackground:
-        return "Antecedentes en evaluación";
-      case resumeSections.STBackground:
-        return "Antecedentes en ciencia y tecnología";
-      case resumeSections.AcademicProduction:
-        return "Producciones academicas";
-      case resumeSections.Award:
-        return "Premios";
-      case resumeSections.Other:
-        return "Otros antecedentes profesionales relevantes";
-      default:
-        return "ERROR";
-    }
+    return resumeSections.filter((x) => x.value === sectionType)[0]
+      ?.description;
   };
 
   const getSectionFields = (sectionType) => {
-    switch (sectionType) {
-      case resumeSections.Degree:
-        return {
-          subType: true,
-          institution: true,
-          title: true,
-          startYear: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      case resumeSections.FurtherTraining:
-        return {
-          subType: true,
-          title: true,
-          institution: true,
-          endYear: true,
-        };
-      case resumeSections.Scholarship:
-        return {
-          title: true,
-          subType: true,
-          institution: true,
-          startYear: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      case resumeSections.TeachingBackground:
-        return {
-          subType: true,
-          title: true,
-          institution: true,
-          startYear: true,
-          endYear: true,
-          currentSituation: true,
-          subject: true,
-          duration: true,
-        };
-      case resumeSections.ManagementBackground:
-        return {
-          subType: true,
-          title: true,
-          institution: true,
-          startYear: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      case resumeSections.ResearchBackground:
-        return {
-          title: true,
-          institution: true,
-          startYear: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      case resumeSections.HRBackground:
-        return {
-          title: true,
-          institution: true,
-          startYear: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      case resumeSections.EvaluationBackground:
-        return {
-          title: true,
-          institution: true,
-          startYear: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      case resumeSections.STBackground:
-        return {
-          title: true,
-          institution: true,
-          startYear: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      case resumeSections.AcademicProduction:
-        return {
-          title: true,
-          institution: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      case resumeSections.Award:
-        return {
-          title: true,
-          institution: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      case resumeSections.Other:
-        return {
-          title: true,
-          institution: true,
-          startYear: true,
-          endYear: true,
-          currentSituation: true,
-        };
-      default:
-        return {};
-    }
+    return resumeSections.filter((x) => x.value === sectionType)[0]
+      ?.fieldsToShow;
   };
 
   const getSectionBody = (sectionType, sectionData) => {
@@ -314,12 +185,13 @@ export default function ResumeSection(props) {
 
     return (
       <Form
+        key={sectionData?._id}
         layout="inline"
         name="basic"
         preserve={false}
         initialValues={sectionData}
         // preserve={false}
-        onFinish={createOrUpdate}
+        onFinish={createOrUpdate(sectionData?._id)}
         // onFinishFailed={onFinishFailed}
       >
         {activeFields.subType ? (
@@ -490,7 +362,7 @@ export default function ResumeSection(props) {
 
   return (
     <>
-      <Card style={{ width: "80%" }}>
+      <Card id={props.data?.sectionType} style={{ width: "80%" }}>
         <Row>
           <Col span={22}>
             <Title level={5}>{getSectionTitle(props.data?.sectionType)}</Title>

@@ -39,22 +39,7 @@ export const roles = {
   UHumanResources: "UHumanResources",
 };
 
-export const resumeSectionsEnum = [
-  "Degree",
-  "FurtherTraining",
-  "Scholarship",
-  "TeachingBackground",
-  "ManagementBackground",
-  "ResearchBackground",
-  "HRBackground",
-  "EvaluationBackground",
-  "STBackground",
-  "AcademicProduction",
-  "Award",
-  "Other",
-];
-
-export const resumeSections = {
+export const resumeSectionsEnum = {
   Degree: "Degree",
   FurtherTraining: "FurtherTraining",
   Scholarship: "Scholarship",
@@ -67,7 +52,23 @@ export const resumeSections = {
   AcademicProduction: "AcademicProduction",
   Award: "Award",
   Other: "Other",
+  
 };
+export const resumeSections = [
+  { key: "4", value: "Degree", description: "Formación Superior y Media", fieldsToShow: { subType: true, institution: true, title: true, startYear: true, endYear: true, currentSituation: true } },
+  { key: "5", value: "FurtherTraining", description: "Formacion Complementaria", fieldsToShow: { subType: true, title: true, institution: true, endYear: true } },
+  { key: "6", value: "Scholarship", description: "Becas", fieldsToShow: { title: true, subType: true, institution: true, startYear: true, endYear: true, currentSituation: true } },
+  { key: "7", value: "TeachingBackground", description: "Antecedentes en Docencia", fieldsToShow: { subType: true, title: true, institution: true, startYear: true, endYear: true, currentSituation: true, subject: true, duration: true } },
+  { key: "8", value: "ManagementBackground", description: "Antecedentes en Gestión", fieldsToShow: { subType: true, title: true, institution: true, startYear: true, endYear: true, currentSituation: true } },
+  { key: "9", value: "ResearchBackground", description: "Antecedentes en Investigación", fieldsToShow: { title: true, institution: true, startYear: true, endYear: true, currentSituation: true } },
+  { key: "10", value: "HRBackground", description: "Antecedentes en Formación y RRHH", fieldsToShow: { title: true, institution: true, startYear: true, endYear: true, currentSituation: true } },
+  { key: "11", value: "EvaluationBackground", description: "Antecedentes en Evaluación", fieldsToShow: { title: true, institution: true, startYear: true, endYear: true, currentSituation: true } },
+  { key: "12", value: "STBackground", description: "Antecedentes en Ciencia y Tecnología", fieldsToShow: { title: true, institution: true, startYear: true, endYear: true, currentSituation: true } },
+  { key: "13", value: "AcademicProduction", description: "Producciones Academicas", fieldsToShow: { title: true, institution: true, endYear: true, currentSituation: true } },
+  { key: "14", value: "Award", description: "Premios", fieldsToShow: { title: true, institution: true, endYear: true, currentSituation: true } },
+  { key: "15", value: "Other", description: "Otros Antecedentes Profesionales", fieldsToShow: { title: true, institution: true, startYear: true, endYear: true, currentSituation: true } }
+];
+
 
 export const countries = countriesList;
 
