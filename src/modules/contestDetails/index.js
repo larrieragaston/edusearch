@@ -10,8 +10,8 @@ import {
   List,
   Modal,
 } from "antd";
-import logoSrc from "../../assets/logo.png";
-import { HeartOutlined, DownloadOutlined, HeartFilled } from "@ant-design/icons";
+import logoSrc from "../../assets/uade.png";
+import { HeartOutlined, DownloadOutlined, HeartFilled, ClockCircleOutlined, CalendarOutlined, ApartmentOutlined } from "@ant-design/icons";
 import { contestSteps, noInformation, periodTypes } from "../../constants";
 import contestService from "../../services/contest";
 import postulationService from "../../services/postulation";
@@ -117,35 +117,38 @@ export default function ContestDetails(props) {
 
   return (
     <React.Fragment>
-      <Row>
+      <Row style={{ paddingTop: '2em', paddingLeft: '1em' }}>
         <Col span={12}>
-          <Row>
-            {data.subject?.name ?? noInformation}
+          <Row style={{ alignItems: 'center' }}>
+            <Text style={{ fontSize: '26px' }}>{data.subject?.name ?? noInformation}</Text>
             {isFavourite ? (
               <HeartFilled
-                style={{ color: "#e01616", fontSize: 20 }}
+                style={{ color: "#e01616", fontSize: 20, paddingLeft: '0.5em' }}
                 onClick={() => deleteFavourite(data._id)}
               />
             ) : (
               <HeartOutlined
-                style={{ fontSize: 20 }}
+                style={{ color: '#0262CF', fontSize: 20, paddingTop: '0.3em', paddingBottom: '0.4em', paddingLeft: '0.5em' }}
                 onClick={() => saveFavourite(data._id)}
               />
             )}
           </Row>
-
-          <Row>
+          <Row style={{ fontStyle: 'italic', fontSize: '14px', paddingBottom: '0.7em' }}>
             {data.dueDate ? (
               <Text>{getDaysDifferenceText(data.dueDate)}</Text>
             ) : (
-              <Text>
-                No se ha establecido una fecha para el cierren las postulaciones
-                aun
-              </Text>
+              <Text>No se ha establecido fecha para el cierre de postulaciones</Text>
             )}
           </Row>
-          <Row>
-            <HeartOutlined />
+        </Col>
+        <Col span={10}>
+          <Row justify="end">
+            <img height={50} alt={"logo-EduSearch"} src={logoSrc} />
+          </Row>
+        </Col>
+        <Col span={12}>
+          <Row style={{ alignItems: 'center' }}>
+            <ClockCircleOutlined style={{ color: '#0262CF', paddingLeft: '0.3em', paddingRight: '0.5em' }} />
             <Text>
               {data.day ?? noInformation} -{" "}
               {data.startsAt || data.endsAt
@@ -154,21 +157,19 @@ export default function ContestDetails(props) {
             </Text>
           </Row>
           <Row>
-            <HeartOutlined />
+            <CalendarOutlined style={{ color: '#0262CF', paddingLeft: '0.3em', paddingRight: '0.5em' }} />
             <Text>
               Periodo{" "}
               {getPeriodType(data?.subject?.periodType) ?? noInformation}
             </Text>
           </Row>
           <Row>
-            <HeartOutlined />
+            <ApartmentOutlined style={{ color: '#0262CF', paddingLeft: '0.3em', paddingRight: '0.5em' }} />
             <Text>{data.university?.name ?? noInformation}</Text>
           </Row>
         </Col>
-        <Col span={12}>
-          <Row justify="end">
-            <img alt={"logo-EduSearch"} src={logoSrc} />
-          </Row>
+
+        <Col span={10} style={{ alignSelf: 'flex-end' }}>
           <Row justify="end">
             {hasPostulation ? (
               <Button type="primary" disabled>
@@ -190,11 +191,15 @@ export default function ContestDetails(props) {
               <List
                 size="small"
                 dataSource={data.requirements}
+                split={false}
                 renderItem={(item) => (
-                  <List.Item>
-                    - {item.name}{" "}
-                    {item.optional ? <Text disabled>(Opcopnal)</Text> : ""}
-                  </List.Item>
+                  item.optional ?
+                    <List.Item style={{ fontStyle: 'italic', fontSize: '14px', color: "#CCCCCC" }}>
+                      - {item.name}{" "}
+                    </List.Item> :
+                    <List.Item style={{ fontStyle: 'italic', fontSize: '14px' }}>
+                      - {item.name}{" "}
+                    </List.Item>
                 )}
               />
             ) : (
@@ -222,6 +227,7 @@ export default function ContestDetails(props) {
       </Row>
       <Divider />
       <Row>
+        <Text style={{ color: '#0262CF', fontSize: '26px', paddingBottom: '1.5em' }}>Etapa de busqueda</Text>
         <Steps progressDot current={data.activeStage ?? 0}>
           {getSteps(data.hasColloquium)}
         </Steps>

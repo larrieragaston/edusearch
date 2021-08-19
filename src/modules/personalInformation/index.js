@@ -375,7 +375,7 @@ export default function PersonalInformation() {
                                         <Button type="link" onClick={() => setIsEditing(false)}>Cancelar</Button>
                                     </Form.Item> :
                                     <Form.Item >
-                                        <Button type="primary" loading block>Loading</Button>
+                                        <Button type="primary" loading block>Enviando</Button>
                                         <Button type="link" disabled>Cancelar</Button>
                                     </Form.Item>}
 
