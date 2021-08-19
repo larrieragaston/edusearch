@@ -104,7 +104,7 @@ export default function Login() {
                         Iniciar sesión
                       </Button> :
                       <Button type="primary" loading block>
-                        Loading
+                        Enviando
                       </Button>}
                 </Form.Item>
                 <Row justify="end">

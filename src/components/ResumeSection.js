@@ -12,7 +12,7 @@ import {
   Modal,
 } from "antd";
 import {
-  PlusOutlined,
+  PlusCircleOutlined,
   EditOutlined,
   DeleteOutlined,
   ExclamationCircleOutlined,
@@ -110,71 +110,88 @@ export default function ResumeSection(props) {
       ?.fieldsToShow;
   };
 
+  const getsituationType = (type) => {
+    return (
+      situationTypes.filter((x) => x.value === type)[0]?.description ?? null
+    );
+  };
+
   const getSectionBody = (sectionType, sectionData) => {
     const activeFields = getSectionFields(sectionType);
 
     return (
       <>
-        <Col span={20}>
+        <Col span={20} style={{ paddingTop: 10, paddingLeft: 20 }}>
           {activeFields.subType ? (
             <Row>
-              <Text>{getDegreeType(sectionData?.subType)}</Text>
+              <Text style={{ color: "#CCCCCC" }}>
+                {getDegreeType(sectionData?.subType)}
+              </Text>
             </Row>
           ) : (
             <></>
           )}
           {activeFields.institution ? (
-            <Row>
-              <Text>{sectionData?.institution}</Text>
+            <Row style={{ paddingLeft: "20px" }}>
+              <Text style={{ color: "#666666" }}>
+                {sectionData?.institution}
+              </Text>
             </Row>
           ) : (
             <></>
           )}
           {activeFields.title ? (
-            <Row>
-              <Text>{sectionData?.title}</Text>
+            <Row style={{ paddingLeft: "20px" }}>
+              <Text style={{ color: "#0262CF" }}>{sectionData?.title}</Text>
             </Row>
           ) : (
             <></>
           )}
           {activeFields.startYear ? (
-            <Row>
-              <Text>
+            <Row style={{ paddingLeft: "20px" }}>
+              <Text style={{ color: "#CCCCCC" }}>
                 {sectionData?.startYear} - {sectionData?.endYear} (
-                {sectionData?.currentSituation})
+                {getsituationType(sectionData?.currentSituation)})
               </Text>
             </Row>
           ) : activeFields.currentSituation ? (
-            <Row>
-              <Text>
-                {sectionData?.endYear} ({sectionData?.currentSituation})
+            <Row style={{ paddingLeft: "20px" }}>
+              <Text style={{ color: "#CCCCCC" }}>
+                {sectionData?.endYear} (
+                {getsituationType(sectionData?.currentSituation)})
               </Text>
             </Row>
           ) : activeFields.endYear ? (
-            <Row>
-              <Text>{sectionData?.endYear}</Text>
+            <Row style={{ paddingLeft: "20px" }}>
+              <Text style={{ color: "#CCCCCC" }}>{sectionData?.endYear}</Text>
             </Row>
           ) : (
             <></>
           )}
           {activeFields.subject ? (
-            <Row>
+            <Row style={{ paddingLeft: "20px" }}>
               <Text>{sectionData?.subject}</Text>
             </Row>
           ) : (
             <></>
           )}
           {activeFields.duration ? (
-            <Row>
-              <Text>{sectionData?.duration}</Text>
+            <Row style={{ paddingLeft: "20px" }}>
+              <Text style={{ color: "#CCCCCC" }}>{sectionData?.duration}</Text>
             </Row>
           ) : (
             <></>
           )}
         </Col>
-        <Col span={4}>
-          <EditOutlined onClick={() => showModal(sectionData)} />
-          <DeleteOutlined onClick={() => showConfirm(sectionData)} />
+        <Col span={4} style={{ alignItems: "center" }}>
+          <EditOutlined
+            style={{ color: "#0262CF", padding: 5, fontSize: "16px" }}
+            onClick={() => showModal(sectionData)}
+          />
+          <DeleteOutlined
+            style={{ color: "#0262CF", padding: 5, fontSize: "16px" }}
+            onClick={() => showConfirm(sectionData)}
+          />
         </Col>
       </>
     );
@@ -186,175 +203,208 @@ export default function ResumeSection(props) {
     return (
       <Form
         key={sectionData?._id}
-        layout="inline"
+        layout="vertical"
+        // labelCol={{       span: 4}       }
+        // wrapperCol={{span: 14}}
         name="basic"
         preserve={false}
         initialValues={sectionData}
-        // preserve={false}
         onFinish={createOrUpdate(sectionData?._id)}
         // onFinishFailed={onFinishFailed}
       >
-        {activeFields.subType ? (
-          <Form.Item
-            label="Tipo"
-            name="subType"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Select
-              placeholder="Seleccione un tipo"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              {degreeTypes.map((x) => (
-                <Option key={x.value} value={x.value}>
-                  {x.description}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-        ) : (
-          <></>
-        )}
-        {activeFields.subType ? (
-          <Form.Item
-            label="Institucion"
-            name="institution"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-        ) : (
-          <></>
-        )}
-        {activeFields.title ? (
-          <Form.Item
-            label="Titulo"
-            name="title"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-        ) : (
-          <></>
-        )}
-        {activeFields.startYear ? (
-          <Form.Item
-            label="Desde"
-            name="startYear"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <InputNumber min={1950} max={2021} />
-          </Form.Item>
-        ) : (
-          <></>
-        )}
-        {activeFields.endYear ? (
-          <Form.Item label="Hasta" name="endYear">
-            <InputNumber min={1950} max={2021} />
-          </Form.Item>
-        ) : (
-          <></>
-        )}
-        {activeFields.currentSituation ? (
-          <Form.Item
-            label="Situación Actual"
-            name="currentSituation"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Select
-              placeholder="Seleccione un estado"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              {situationTypes.map((x) => (
-                <Option key={x.value} value={x.value}>
-                  {x.description}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-        ) : (
-          <></>
-        )}
-        {activeFields.subject ? (
-          <Form.Item
-            label="Materia"
-            name="subject"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-        ) : (
-          <></>
-        )}
-        {activeFields.duration ? (
-          <Form.Item
-            label="Duration"
-            name="duracion"
-            rules={[
-              {
-                required: true,
-                message: "Campo obligatorio",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-        ) : (
-          <></>
-        )}
+        <Row style={{ justifyContent: "space-between" }}>
+          {activeFields.subType ? (
+            <Col span={11}>
+              <Form.Item
+                label="Tipo"
+                name="subType"
+                rules={[
+                  {
+                    required: true,
+                    message: "Campo obligatorio",
+                  },
+                ]}
+              >
+                <Select
+                  placeholder="Seleccione un tipo"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {degreeTypes.map((x) => (
+                    <Option key={x.value} value={x.value}>
+                      {x.description}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          ) : (
+            <></>
+          )}
+          {activeFields.institution ? (
+            <Col span={11}>
+              <Form.Item
+                label="Institucion"
+                name="institution"
+                rules={[
+                  {
+                    required: true,
+                    message: "Campo obligatorio",
+                  },
+                ]}
+              >
+                <Input bordered={true} />
+              </Form.Item>
+            </Col>
+          ) : (
+            <></>
+          )}
+          {activeFields.title ? (
+            <Col span={11}>
+              <Form.Item
+                label="Titulo"
+                name="title"
+                rules={[
+                  {
+                    required: true,
+                    message: "Campo obligatorio",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+          ) : (
+            <></>
+          )}
+          {activeFields.startYear ? (
+            <Col span={11}>
+              <Form.Item
+                label="Desde"
+                name="startYear"
+                rules={[
+                  {
+                    required: true,
+                    message: "Campo obligatorio",
+                  },
+                ]}
+              >
+                <InputNumber min={1950} max={2021} />
+              </Form.Item>
+            </Col>
+          ) : (
+            <></>
+          )}
+          {activeFields.endYear ? (
+            <Col span={11}>
+              <Form.Item label="Hasta" name="endYear">
+                <InputNumber min={1950} max={2021} />
+              </Form.Item>
+            </Col>
+          ) : (
+            <></>
+          )}
+          {activeFields.currentSituation ? (
+            <Col span={11}>
+              <Form.Item
+                label="Situación Actual"
+                name="currentSituation"
+                rules={[
+                  {
+                    required: true,
+                    message: "Campo obligatorio",
+                  },
+                ]}
+              >
+                <Select
+                  placeholder="Seleccione un estado"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {situationTypes.map((x) => (
+                    <Option key={x.value} value={x.value}>
+                      {x.description}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          ) : (
+            <></>
+          )}
+          {activeFields.subject ? (
+            <Col span={11}>
+              <Form.Item
+                label="Materia"
+                name="subject"
+                rules={[
+                  {
+                    required: true,
+                    message: "Campo obligatorio",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+          ) : (
+            <></>
+          )}
+          {activeFields.duration ? (
+            <Col span={11}>
+              <Form.Item
+                label="Duration"
+                name="duracion"
+                rules={[
+                  {
+                    required: true,
+                    message: "Campo obligatorio",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+          ) : (
+            <></>
+          )}
+        </Row>
         {!isSubmitting ? (
-          <Form.Item>
-            <Button type="primary" htmlType="submit" block>
-              Guardar Cambios
-            </Button>
-            <Button type="link" onClick={() => cancelCreateOrUpdate()}>
-              Cancelar
-            </Button>
-          </Form.Item>
+          <Row>
+            <Col span={6} offset={15}>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  block
+                  style={{ outlineColor: "#0262cf", borderRadius: 5 }}
+                >
+                  Guardar Cambios
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
         ) : (
-          <Form.Item>
-            <Button type="primary" loading block>
-              Loading
-            </Button>
-            <Button type="link" disabled>
-              Cancelar
-            </Button>
-          </Form.Item>
+          <Row style={{}}>
+            <Form.Item>
+              <Button
+                type="primary"
+                loading
+                block
+                style={{ outlineColor: "#0262cf", borderRadius: 5 }}
+              >
+                Enviando
+              </Button>
+            </Form.Item>
+          </Row>
         )}
       </Form>
     );
@@ -362,32 +412,57 @@ export default function ResumeSection(props) {
 
   return (
     <>
-      <Card id={props.data?.sectionType} style={{ width: "80%" }}>
-        <Row>
+      <Card
+        id={props.data?.sectionType}
+        style={{
+          width: 800,
+          margin: "0.5em",
+          borderRadius: 5,
+          boxShadow: "0px 7px 6px rgb(0 0 0 / 7%)",
+        }}
+        bodyStyle={{ padding: "20px" }}
+      >
+        <Row style={{ alignItems: "center" }}>
           <Col span={22}>
-            <Title level={5}>{getSectionTitle(props.data?.sectionType)}</Title>
+            <Title level={5} style={{ color: "#0262CF" }}>
+              {getSectionTitle(props.data?.sectionType)}
+            </Title>
           </Col>
-          <Col span={2}>
-            <PlusOutlined onClick={() => showModal()} />
+          <Col span={2} style={{ textAlign: "center" }}>
+            <PlusCircleOutlined
+              style={{
+                color: "#0262CF",
+                fontSize: 24,
+                paddingTop: "0.3em",
+                paddingBottom: "0.4em",
+                paddingLeft: "0.2em",
+              }}
+              onClick={() => showModal()}
+            />
           </Col>
         </Row>
         {props.data?.sectionData?.length > 0 ? (
-          <Row>
+          <Row style={{ alignItems: "center" }}>
             {props.data.sectionData.map((x) =>
               getSectionBody(props.data?.sectionType, x)
             )}
           </Row>
         ) : (
           <Row>
-            <Text>{noInformationSection}</Text>
+            <Text style={{ color: "#CCCCCC" }}>{noInformationSection}</Text>
           </Row>
         )}
       </Card>
       <Modal
-        title={getSectionTitle(props.data?.sectionType)}
+        title={
+          <Text style={{ color: "#0262CF" }}>
+            {getSectionTitle(props.data?.sectionType)}
+          </Text>
+        }
         visible={visible}
         onCancel={cancelCreateOrUpdate}
         footer={null}
+        width={700}
       >
         {getModalBody(props.data?.sectionType, modalData)}
       </Modal>
