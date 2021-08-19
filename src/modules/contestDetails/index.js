@@ -10,8 +10,8 @@ import {
   List,
   Modal,
 } from "antd";
-import logoSrc from "../../assets/logo.png";
-import { HeartOutlined, DownloadOutlined, HeartFilled, ExclamationCircleOutlined, ClockCircleOutlined, CalendarOutlined, ApartmentOutlined } from "@ant-design/icons";
+import logoSrc from "../../assets/uade.png";
+import { HeartOutlined, DownloadOutlined, HeartFilled, ClockCircleOutlined, CalendarOutlined, ApartmentOutlined } from "@ant-design/icons";
 import { contestSteps, noInformation, periodTypes } from "../../constants";
 import contestService from "../../services/contest";
 import postulationService from "../../services/postulation";
@@ -128,7 +128,7 @@ export default function ContestDetails(props) {
               />
             ) : (
               <HeartOutlined
-                style={{ fontSize: 20, paddingLeft: '0.5em' }}
+                style={{ color: '#0262CF', fontSize: 20, paddingTop: '0.3em', paddingBottom: '0.4em', paddingLeft: '0.5em' }}
                 onClick={() => saveFavourite(data._id)}
               />
             )}
@@ -143,7 +143,7 @@ export default function ContestDetails(props) {
         </Col>
         <Col span={10}>
           <Row justify="end">
-            <img alt={"logo-EduSearch"} src={logoSrc} />
+            <img height={50} alt={"logo-EduSearch"} src={logoSrc} />
           </Row>
         </Col>
         <Col span={12}>
