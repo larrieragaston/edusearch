@@ -50,10 +50,10 @@ export default function MainLayout(props) {
     }
 
     const content = (
-        <div style={{ maxWidth: 200 }}>
-            <Button type="text" block onClick={() => navigate('/personal-information')}>Datos personales</Button>
+        <div style={{ maxWidth: 150 }}>
+            <Button type="text" block onClick={() => navigate('/personal-information')}>Datos Personales</Button>
             {/* <Button type="text" block>Mi CV</Button> */}
-            <Button type="text" block onClick={() => navigate('/acccount-settings')}>Configuración de la cuenta</Button>
+            <Button type="text" block onClick={() => navigate('/acccount-settings')}>Mi Cuenta</Button>
             <Button type="text" block onClick={() => logout()}>Cerrar sesión</Button>
         </div>
     );

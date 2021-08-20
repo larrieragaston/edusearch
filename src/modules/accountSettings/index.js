@@ -44,7 +44,7 @@ export default function AccountSettings() {
     return (
         <React.Fragment>
             <Row justify='center'>
-                <Title level={3} className={styles.sectiontitle}>Configuracion de la Cuenta</Title>
+                <Title level={3} className={styles.sectiontitle}>Mi Cuenta</Title>
             </Row>
             <Row justify='center'>
                 <Text type='secondary' className={styles.sectionsubtitle}>Información básica, como tu nombre y foto, que verán las Universidades al momento de tu postulación</Text>

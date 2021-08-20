@@ -23,7 +23,7 @@ export const contestSteps = [
   "Entrevistas a los docentes",
   "Coloquio",
   "Calificación de postulaciones",
-  "Publicacion de resultados",
+  "Publicación de resultados",
   "Cierre del concurso",
 ];
 
@@ -56,7 +56,7 @@ export const resumeSectionsEnum = {
 };
 export const resumeSections = [
   { key: "4", value: "Degree", description: "Formación Superior y Media", fieldsToShow: { subType: true, institution: true, title: true, startYear: true, endYear: true, currentSituation: true } },
-  { key: "5", value: "FurtherTraining", description: "Formacion Complementaria", fieldsToShow: { subType: true, title: true, institution: true, endYear: true } },
+  { key: "5", value: "FurtherTraining", description: "Formación Complementaria", fieldsToShow: { subType: true, title: true, institution: true, endYear: true } },
   { key: "6", value: "Scholarship", description: "Becas", fieldsToShow: { title: true, subType: true, institution: true, startYear: true, endYear: true, currentSituation: true } },
   { key: "7", value: "TeachingBackground", description: "Antecedentes en Docencia", fieldsToShow: { subType: true, title: true, institution: true, startYear: true, endYear: true, currentSituation: true, subject: true, duration: true } },
   { key: "8", value: "ManagementBackground", description: "Antecedentes en Gestión", fieldsToShow: { subType: true, title: true, institution: true, startYear: true, endYear: true, currentSituation: true } },
@@ -79,13 +79,13 @@ export const degreeTypes = [
   { value: "NonUniversitary", description: "No Universitario" },
   { value: "NonUniversitary-PostTitle", description: "No Universitario - PostTitulo" },
   { value: "Grade", description: "Grado" },
-  { value: "Postgraduate-Specialization", description: "PostGrado - Especializacion" },
-  { value: "Postgraduate-Master", description: "PostGrado - Maestria" },
+  { value: "Postgraduate-Specialization", description: "PostGrado - Especialización" },
+  { value: "Postgraduate-Master", description: "PostGrado - Maestría" },
   { value: "Postgraduate-Doctorate", description: "PostGrado - Doctorado" }
 ];
 
 export const situationTypes = [
-  { value: "Ended", description: "Terminado" },
+  { value: "Ended", description: "Finalizado" },
   { value: "Current", description: "En proceso" },
   { value: "Quit", description: "Abandonó" },
 ];
