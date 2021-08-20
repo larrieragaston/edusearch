@@ -27,7 +27,7 @@ export default function ProfessionalInformation() {
                 <Title level={3} className={styles.sectiontitle}>Mi CV</Title>
             </Row>
             <Row justify='center'>
-                <Text type='secondary' className={styles.sectionsubtitle}>Información sobre tu formacion académica y profesional.</Text>
+                <Text type='secondary' className={styles.sectionsubtitle}>Información sobre tu formación académica y profesional.</Text>
             </Row>
             <Row justify='center'>
                 {resumeSections.map(x => <ResumeSection data={getSectionData(x.value)} />)}

@@ -55,14 +55,14 @@ export default function Contest({ data }) {
     setHasPostulation(true);
     Modal.success({
       title: "Felicitaciones!",
-      content: "Muchas gracias por su postulacion",
+      content: "Muchas gracias por su postulación",
     });
   }
 
   function error() {
     Modal.error({
       title: "Ups!",
-      content: "No se ha podido realizar la postulacion",
+      content: "No se ha podido realizar la postulación",
     });
   }
 

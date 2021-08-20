@@ -214,7 +214,7 @@ export default function ResumeSection(props) {
       >
         <Row style={{ justifyContent: "space-between" }}>
           {activeFields.subType ? (
-            <Col span={11}>
+            <Col span={10}>
               <Form.Item
                 label="Tipo"
                 name="subType"
@@ -246,9 +246,9 @@ export default function ResumeSection(props) {
             <></>
           )}
           {activeFields.institution ? (
-            <Col span={11}>
+            <Col span={10}>
               <Form.Item
-                label="Institucion"
+                label="Institución"
                 name="institution"
                 rules={[
                   {
@@ -264,7 +264,7 @@ export default function ResumeSection(props) {
             <></>
           )}
           {activeFields.title ? (
-            <Col span={11}>
+            <Col span={10}>
               <Form.Item
                 label="Titulo"
                 name="title"
@@ -282,7 +282,7 @@ export default function ResumeSection(props) {
             <></>
           )}
           {activeFields.startYear ? (
-            <Col span={11}>
+            <Col span={5}>
               <Form.Item
                 label="Desde"
                 name="startYear"
@@ -300,7 +300,7 @@ export default function ResumeSection(props) {
             <></>
           )}
           {activeFields.endYear ? (
-            <Col span={11}>
+            <Col span={5}>
               <Form.Item label="Hasta" name="endYear">
                 <InputNumber min={1950} max={2021} />
               </Form.Item>
@@ -309,7 +309,7 @@ export default function ResumeSection(props) {
             <></>
           )}
           {activeFields.currentSituation ? (
-            <Col span={11}>
+            <Col span={10}>
               <Form.Item
                 label="Situación Actual"
                 name="currentSituation"
@@ -341,7 +341,7 @@ export default function ResumeSection(props) {
             <></>
           )}
           {activeFields.subject ? (
-            <Col span={11}>
+            <Col span={10}>
               <Form.Item
                 label="Materia"
                 name="subject"
@@ -359,10 +359,10 @@ export default function ResumeSection(props) {
             <></>
           )}
           {activeFields.duration ? (
-            <Col span={11}>
+            <Col span={10}>
               <Form.Item
-                label="Duration"
-                name="duracion"
+                label="Duración"
+                name="duration"
                 rules={[
                   {
                     required: true,
@@ -377,9 +377,9 @@ export default function ResumeSection(props) {
             <></>
           )}
         </Row>
-        {!isSubmitting ? (
-          <Row>
-            <Col span={6} offset={15}>
+        <Row>
+          <Col span={6} offset={15}>
+            {!isSubmitting ? (
               <Form.Item>
                 <Button
                   type="primary"
@@ -390,22 +390,20 @@ export default function ResumeSection(props) {
                   Guardar Cambios
                 </Button>
               </Form.Item>
-            </Col>
-          </Row>
-        ) : (
-          <Row style={{}}>
-            <Form.Item>
-              <Button
-                type="primary"
-                loading
-                block
-                style={{ outlineColor: "#0262cf", borderRadius: 5 }}
-              >
-                Enviando
-              </Button>
-            </Form.Item>
-          </Row>
-        )}
+            ) : (
+              <Form.Item>
+                <Button
+                  type="primary"
+                  loading
+                  block
+                  style={{ outlineColor: "#0262cf", borderRadius: 5 }}
+                >
+                  Enviando
+                </Button>
+              </Form.Item>
+            )}
+          </Col>
+        </Row>
       </Form>
     );
   };
