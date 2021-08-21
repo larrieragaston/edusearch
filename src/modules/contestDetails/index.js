@@ -10,7 +10,8 @@ import {
   List,
   Modal,
 } from "antd";
-import logoSrc from "../../assets/uade.png";
+import logoUADE from "../../assets/logoUADE.png";
+import logoINSPT from "../../assets/logoINSPT.png"; 
 import { HeartOutlined, DownloadOutlined, HeartFilled, ClockCircleOutlined, CalendarOutlined, ApartmentOutlined } from "@ant-design/icons";
 import { contestSteps, noInformation, periodTypes } from "../../constants";
 import contestService from "../../services/contest";
@@ -143,7 +144,7 @@ export default function ContestDetails(props) {
         </Col>
         <Col span={10}>
           <Row justify="end">
-            <img height={50} alt={"logo-EduSearch"} src={logoSrc} />
+            <img height={50} alt={"logo-EduSearch"} src={data.university?.name == 'UADE' ? logoUADE : logoINSPT} />
           </Row>
         </Col>
         <Col span={12}>

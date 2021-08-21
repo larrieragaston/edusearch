@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Typography, Button, Modal } from "antd";
-// import logoSrc from "../assets/logo.png";
-import uadeSrc from "../assets/uade.png";
-// import udesaSrc from "../assets/udesa.png";
+import logoUADE from "../assets/logoUADE.png";
+import logoINSPT from "../assets/logoINSPT.png"; 
 import {
   HeartOutlined,
   HeartFilled,
@@ -108,7 +107,7 @@ export default function Contest({ data }) {
             : noInformation}</Text>
         </Col>
         <Col span={10} offset={2}>
-          <img alt={"logo-uade"} src={uadeSrc} style={{ maxWidth: '9em' }} />
+          <img alt={"logo-uade"} src={data.university?.name == 'UADE' ? logoUADE : logoINSPT} style={{ maxWidth: '9em' }} />
         </Col>
       </Row>
       <Row>
