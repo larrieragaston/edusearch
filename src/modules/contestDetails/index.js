@@ -144,7 +144,7 @@ export default function ContestDetails(props) {
         </Col>
         <Col span={10}>
           <Row justify="end">
-            <img height={50} alt={"logo-EduSearch"} src={data.university?.name == 'UADE' ? logoUADE : logoINSPT} />
+            <img height={50} alt={"logo-EduSearch"} src={data.university?.name === 'UADE' ? logoUADE : logoINSPT} />
           </Row>
         </Col>
         <Col span={12}>

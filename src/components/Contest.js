@@ -107,7 +107,7 @@ export default function Contest({ data }) {
             : noInformation}</Text>
         </Col>
         <Col span={10} offset={2}>
-          <img alt={"logo-uade"} src={data.university?.name == 'UADE' ? logoUADE : logoINSPT} style={{ maxWidth: '9em' }} />
+          <img alt={"logo-uade"} src={data.university?.name === 'UADE' ? logoUADE : logoINSPT} style={{ maxWidth: '9em' }} />
         </Col>
       </Row>
       <Row>
