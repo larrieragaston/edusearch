@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Card, Row, Col, Typography, Button, Form, Input, Avatar, Checkbox } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, EditOutlined } from '@ant-design/icons';
 import { noInformation } from "../../constants";
 import userService from '../../services/user';
 import { UserContext } from '../../contexts/userContext';
@@ -62,7 +62,9 @@ export default function AccountSettings() {
                                         <Avatar size={64} icon={<UserOutlined />} />
                                     </Row>
                                     <Row justify='center'>
-                                        <Text type='secondary'>Editar tu foto de perfil</Text>
+                                        {/* <Upload {...props}> */}
+                                            <Button icon={<EditOutlined />}><Text type='secondary'>Editar tu foto de perfil</Text></Button>
+                                        {/* </Upload> */}
                                     </Row>
                                 </Col>
                                 <Col span={14}>

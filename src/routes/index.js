@@ -10,6 +10,7 @@ import AccountSettings from "../modules/accountSettings";
 import PersonalInformation from "../modules/personalInformation";
 import ProfessionalInformation from "../modules/professionalInformation";
 import Contests from "../modules/contests";
+import Contest from "../modules/contest";
 import ContestDetails from "../modules/contestDetails";
 import MyUniversity from './../modules/myUniversity/index';
 import ScoreTable from './../modules/scoreTable/index';
@@ -47,7 +48,7 @@ function Routes() {
           <ScoreTable path="score-table" />
           <Careers path="careers" />
           <Users path="users" />
-          <Contests path="contests/create" />
+          <Contest path="contest/create" />
           <Contests path="contests/drafts" />
           <Contests path="contests/actives" />
           <Contests path="contests/ended" />

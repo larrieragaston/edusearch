@@ -9,4 +9,6 @@ contestService.getContestForUser = () => api.get('/contests/contestsForUser')
 contestService.getContestPostulations = () => api.get('/contests/postulationsForUser')
 contestService.getFavouriteContest = () => api.get('/contests/favouriteForUser')
 
+contestService.create = (payload) => api.post(`/contests/createContest`, { ...payload })
+
 export default contestService

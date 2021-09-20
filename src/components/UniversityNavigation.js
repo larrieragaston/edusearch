@@ -28,7 +28,7 @@ export default function TeacherNavigation() {
 			<Menu defaultSelectedKeys={["1"]} mode="inline">
 				<Menu.Item key="0" icon={<MoreOutlined />} onClick={() => setCollapsed(!collapsed)}/>
 				<Menu.Item key="1" icon={<BarChartOutlined />} onClick={() => navigate("/")}>Dashboard</Menu.Item>
-				<Menu.Item key="2" icon={<PlusOutlined />} onClick={() => navigate("/contests/create")}>Crear Concurso</Menu.Item>
+				<Menu.Item key="2" icon={<PlusOutlined />} onClick={() => navigate("/contest/create")}>Crear Concurso</Menu.Item>
 				<SubMenu key="3" icon={<ApartmentOutlined />} title="Universidad">
 					<Menu.Item key="4" onClick={() => navigate("/my-university")}>Mi Universidad</Menu.Item>
 					<Menu.Item key="5" onClick={() => navigate("/score-table")}>Tabla de Puntajes</Menu.Item>
