@@ -1,14 +1,34 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Card, Row, Col, Typography, Button, Form, Input, Avatar, Checkbox } from 'antd';
+import {Card, Row, Col, Typography, Button, Form, Input, Avatar, Checkbox, Upload, message} from 'antd';
 import { UserOutlined, EditOutlined } from '@ant-design/icons';
-import { noInformation } from "../../constants";
+import {apiBaseUrl, bucketBaseURL, noInformation} from "../../constants";
 import userService from '../../services/user';
 import { UserContext } from '../../contexts/userContext';
 import errorMessage from '../../utils/errorMessage'
 import { toast } from 'react-toastify'
 import styles from './account.module.css';
+import localStorage from "../../services/localStorage";
 
 const { Text, Title } = Typography;
+
+const uploadProps = (setUserData, userData) => ({
+    name: 'profilePicture',
+    action: `${apiBaseUrl}/users/me/img`,
+    headers: {
+        Authorization: localStorage.get()?.token,
+    },
+    onChange(info) {
+        if (info.file.status !== 'uploading') {
+            console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+            setUserData({...userData, mediaUrl: info?.file?.response?.mediaUrl})
+            message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+    },
+})
 
 export default function AccountSettings() {
     const [data, setData] = useState({})
@@ -41,6 +61,8 @@ export default function AccountSettings() {
         console.log('Failed:', errorInfo);
     };
 
+    console.log('userData', userData)
+
     return (
         <React.Fragment>
             <Row justify='center'>
@@ -59,12 +81,14 @@ export default function AccountSettings() {
                             <Row>
                                 <Col span={10}>
                                     <Row justify='center'>
-                                        <Avatar size={64} icon={<UserOutlined />} />
+                                        <Avatar size={64} {...(userData.mediaUrl ? {src: `${bucketBaseURL}/${userData.mediaUrl}` } : { icon: <UserOutlined /> })} />
                                     </Row>
-                                    <Row justify='center'>
-                                        {/* <Upload {...props}> */}
-                                            <Button icon={<EditOutlined />}><Text type='secondary'>Editar tu foto de perfil</Text></Button>
-                                        {/* </Upload> */}
+                                    <Row justify='center' {...{justify: 'center'}}>
+                                         <Upload {...uploadProps(setUserData, userData)}>
+                                            <Button icon={<EditOutlined />} style={{ marginTop: '15px'}}>
+                                                <Text type='secondary'>Editar tu foto de perfil</Text>
+                                            </Button>
+                                         </Upload>
                                     </Row>
                                 </Col>
                                 <Col span={14}>
