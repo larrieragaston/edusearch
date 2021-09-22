@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {Card, Row, Col, Typography, Button, Form, Input, Avatar, Checkbox, Upload, message} from 'antd';
 import { UserOutlined, EditOutlined } from '@ant-design/icons';
-import {apiBaseUrl, bucketBaseURL, noInformation} from "../../constants";
+import {apiBaseUrl, bucketBaseUrl, noInformation} from "../../constants";
 import userService from '../../services/user';
 import { UserContext } from '../../contexts/userContext';
 import errorMessage from '../../utils/errorMessage'
@@ -81,7 +81,7 @@ export default function AccountSettings() {
                             <Row>
                                 <Col span={10}>
                                     <Row justify='center'>
-                                        <Avatar size={64} {...(userData.mediaUrl ? {src: `${bucketBaseURL}/${userData.mediaUrl}` } : { icon: <UserOutlined /> })} />
+                                        <Avatar size={100} {...(userData.mediaUrl ? {src: `${bucketBaseUrl}${userData.mediaUrl}` } : { icon: <UserOutlined /> })} />
                                     </Row>
                                     <Row justify='center' {...{justify: 'center'}}>
                                          <Upload {...uploadProps(setUserData, userData)}>
@@ -111,7 +111,7 @@ export default function AccountSettings() {
                                         <Text type='secondary' className={styles.textsecondary}>{data?.email ?? noInformation}</Text>
                                     </Row>
                                     <Row>
-                                        <Checkbox disabled checked={data?.hasNotificationsEnabled ?? false} />
+                                        <Checkbox disabled checked={data?.hasNotificationsEnabled ?? false} style={{paddingRight:15}}/>
                                         <Text type='secondary' className={styles.textsecondary}>Quiero recibir noitificaciones por correo</Text>
                                     </Row>
                                     <Row>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Typography, Button, Modal } from "antd";
-import logoUADE from "../assets/logoUADE.png";
-import logoINSPT from "../assets/logoINSPT.png"; 
+import noLogo from "../assets/noLogo.jpg";
 import {
   HeartOutlined,
   HeartFilled,
@@ -10,7 +9,7 @@ import {
   CalendarOutlined,
   ApartmentOutlined
 } from "@ant-design/icons";
-import { noInformation, periodTypes } from "../constants";
+import { noInformation, periodTypes, bucketBaseUrl } from "../constants";
 import moment from "moment";
 import { navigate } from "@reach/router";
 import postulationService from "../services/postulation";
@@ -107,7 +106,7 @@ export default function Contest({ data }) {
             : noInformation}</Text>
         </Col>
         <Col span={10} offset={2}>
-          <img alt={"logo-uade"} src={data.university?.name === 'UADE' ? logoUADE : logoINSPT} style={{ maxWidth: '9em' }} />
+          <img alt={"logo-universidad"} src={data.university?.logoUrl != null ? `${bucketBaseUrl}${data.university.logoUrl}` : noLogo} style={{ maxWidth: '9em' }} />
         </Col>
       </Row>
       <Row>

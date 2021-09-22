@@ -10,10 +10,9 @@ import {
   List,
   Modal,
 } from "antd";
-import logoUADE from "../../assets/logoUADE.png";
-import logoINSPT from "../../assets/logoINSPT.png"; 
+import noLogo from "../../assets/noLogo.jpg";
 import { HeartOutlined, DownloadOutlined, HeartFilled, ClockCircleOutlined, CalendarOutlined, ApartmentOutlined } from "@ant-design/icons";
-import { contestSteps, noInformation, periodTypes } from "../../constants";
+import { contestSteps, noInformation, periodTypes, bucketBaseUrl } from "../../constants";
 import contestService from "../../services/contest";
 import postulationService from "../../services/postulation";
 import favouriteService from "../../services/favourite";
@@ -144,7 +143,7 @@ export default function ContestDetails(props) {
         </Col>
         <Col span={10}>
           <Row justify="end">
-            <img height={50} alt={"logo-EduSearch"} src={data.university?.name === 'UADE' ? logoUADE : logoINSPT} />
+            <img height={50} alt={"logo-universidad"} src={data.university?.logoUrl != null ? `${bucketBaseUrl}${data.university.logoUrl}` : noLogo} />
           </Row>
         </Col>
         <Col span={12}>

@@ -18,13 +18,11 @@ import styles from "./contest.module.css";
 import contestService from "./../../services/contest";
 import universityService from "../../services/university";
 import { UserContext } from "../../contexts/userContext";
-import { moment } from 'moment';
 
 const { Text, Title } = Typography;
 const { Option } = Select;
 
 export default function Contest() {
-	const [data, setData] = useState({});
 	const [careers, setCareers] = useState([]);
 	const [subjects, setSubjects] = useState([]);
 	const [filteredSubjects, setFilteredSubjects] = useState([]);
@@ -64,8 +62,7 @@ export default function Contest() {
 		setIsSubmitting(true);
 		const payload = { ...values, active: true, startsAt, endsAt };
 		try {
-			const response = await contestService.create(payload);
-			setData(response);
+			await contestService.create(payload);
 		} catch (e) {
 			const message = errorMessage(e);
 			toast.error(message);

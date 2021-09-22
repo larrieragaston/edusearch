@@ -6,7 +6,7 @@ import { UserOutlined, InfoCircleOutlined, BellOutlined } from '@ant-design/icon
 import { UserContext } from '../../contexts/userContext';
 import userService from '../../services/user';
 import localStorage from '../../services/localStorage'
-import { roles } from './../../constants';
+import { roles, bucketBaseUrl } from "../../constants";
 import TeacherNavigation from './../../components/TeacherNavigation';
 import UniversityNavigation from './../../components/UniversityNavigation';
 import './mainLayout.css';
@@ -67,11 +67,11 @@ export default function MainLayout(props) {
                         ghost={false}
                         title={<img alt={"logo-EduSearch"} src={logoSrc} />}
                         extra={[
-                            <Tag key='4' color="blue">{profileLabel}</Tag>,
+                            <Tag key='4' color="blue" size={64}>{profileLabel}</Tag>,
                             <Button key="3" shape='circle' size='large' icon={<InfoCircleOutlined />} />,
                             <Button key="2" shape='circle' size='large' icon={<BellOutlined />} />,
                             <Popover key="1" placement="bottomRight" content={content}>
-                                <Avatar size='large' icon={<UserOutlined />} />
+                                <Avatar size='large' {...(userData.mediaUrl ? {src: `${bucketBaseUrl}${userData.mediaUrl}` } : { icon: <UserOutlined /> })} />
                             </Popover>,
                         ]}
                     ></PageHeader>

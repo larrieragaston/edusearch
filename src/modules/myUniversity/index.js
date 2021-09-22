@@ -10,17 +10,37 @@ import {
 	Avatar,
 	Select,
 	InputNumber,
-	Divider,
+	Divider, Upload, message
 } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import { noInformation, provinces, universityTypes } from "../../constants";
+import { BankOutlined, EditOutlined } from "@ant-design/icons";
+import { noInformation, provinces, universityTypes, apiBaseUrl, bucketBaseUrl } from "../../constants";
 import universityService from "../../services/university";
 import errorMessage from "../../utils/errorMessage";
 import { toast } from "react-toastify";
+import localStorage from "../../services/localStorage";
 import styles from "./myuniversity.module.css";
 
 const { Option } = Select;
 const { Text, Title } = Typography;
+
+const uploadProps = (setData, data) => ({
+    name: 'universityLogo',
+    action: `${apiBaseUrl}/universities/logo`,
+    headers: {
+        Authorization: localStorage.get()?.token,
+    },
+    onChange(info) {
+        if (info.file.status !== 'uploading') {
+            console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+            setData({...data, logoUrl: info?.file?.response?.logoUrl})
+            message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+    },
+})
 
 export default function MyUniversity() {
 	const [data, setData] = useState({});
@@ -70,7 +90,7 @@ export default function MyUniversity() {
 		values.address = addressGenerator(values);
 		const payload = { ...values };
 		try {
-			const response = await universityService.updateUniversityByUser(payload);
+			await universityService.updateUniversityByUser(payload);
 			setData(values);
 		} catch (e) {
 			const message = errorMessage(e);
@@ -116,12 +136,16 @@ export default function MyUniversity() {
 						<>
 							<Row>
 								<Col span={10}>
-									<Row justify="center">
-										<Avatar size={64} icon={<UserOutlined />} />
-									</Row>
-									<Row justify="center">
-										<Text type="secondary">Editar logo de tu universidad</Text>
-									</Row>
+									<Row justify='center'>
+                                        <Avatar size={100} {...(data?.logoUrl ? {src: `${bucketBaseUrl}${data.logoUrl}` } : { icon: <BankOutlined /> })} />
+                                    </Row>
+                                    <Row justify='center' {...{justify: 'center'}}>
+                                         <Upload {...uploadProps(setData, data)}>
+                                            <Button icon={<EditOutlined />} style={{ marginTop: '15px'}}>
+                                                <Text type='secondary'>Editar el logo de la universidad</Text>
+                                            </Button>
+                                         </Upload>
+                                    </Row>
 								</Col>
 								<Col span={14}>
 									<Row>
