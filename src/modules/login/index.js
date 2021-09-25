@@ -21,7 +21,6 @@ export default function Login() {
     }
   }, [])
 
-  // const onFinish = async (values, { setIsSubmitting }) => {
   const onFinish = async (values) => {
     setIsSubmitting(true)
     console.log('Success:', values)
@@ -109,14 +108,14 @@ export default function Login() {
                 </Form.Item>
                 <Row justify="end">
                   <Form.Item >
-                    <Link href="#"> ¿Olvidaste tu contraseña? </Link>
+                    <Link  onClick={() => navigate('/forgot')}> ¿Olvidaste tu contraseña? </Link>
                   </Form.Item>
                 </Row>
               </Form>
             </Col>
           </Row>
           <Row align="bottom" justify="center">
-            <Text level={5}>No tenes una cuenta <Link strong href="#"> Crea tu cuenta </Link></Text>
+            <Text level={5}>No tenes una cuenta <Link strong onClick={() => navigate('/register')}> Crea tu cuenta </Link></Text>
           </Row>
         </div>
       </Col>
