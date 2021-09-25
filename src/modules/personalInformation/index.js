@@ -37,7 +37,7 @@ export default function PersonalInformation() {
   );
 
   const handleProvinceChange = (value) => {
-    setCities(provinces?.filter((x) => x.name === value)[0]?.cities);
+    setCities(provinces?.find((x) => x.name === value)?.cities);
   };
 
   useEffect(() => {

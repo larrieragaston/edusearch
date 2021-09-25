@@ -38,7 +38,7 @@ export default function ResumeSection(props) {
   const { userData, setUserData } = useContext(UserContext);
 
   const getDegreeType = (type) => {
-    return degreeTypes.filter((x) => x.value === type)[0]?.description ?? null;
+    return degreeTypes.find((x) => x.value === type)?.description ?? null;
   };
 
   const showModal = (sectionData) => {
@@ -101,18 +101,18 @@ export default function ResumeSection(props) {
   };
 
   const getSectionTitle = (sectionType) => {
-    return resumeSections.filter((x) => x.value === sectionType)[0]
+    return resumeSections.find((x) => x.value === sectionType)
       ?.description;
   };
 
   const getSectionFields = (sectionType) => {
-    return resumeSections.filter((x) => x.value === sectionType)[0]
+    return resumeSections.find((x) => x.value === sectionType)
       ?.fieldsToShow;
   };
 
   const getsituationType = (type) => {
     return (
-      situationTypes.filter((x) => x.value === type)[0]?.description ?? null
+      situationTypes.find((x) => x.value === type)?.description ?? null
     );
   };
 

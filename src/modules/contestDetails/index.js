@@ -38,7 +38,7 @@ export default function ContestDetails(props) {
   }, [props.id]);
 
   const getPeriodType = (type) => {
-    return periodTypes.filter((x) => x.value === type)[0]?.description ?? null;
+    return periodTypes.find((x) => x.value === type)?.description ?? null;
   };
 
   const getSteps = (hasColloquium) => {

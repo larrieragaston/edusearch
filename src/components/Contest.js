@@ -23,7 +23,7 @@ export default function Contest({ data }) {
   const [isFavourite, setIsFavourite] = useState(data?.isFavourite);
 
   const getPeriodType = (type) => {
-    return periodTypes.filter((x) => x.value === type)[0]?.description ?? null;
+    return periodTypes.find((x) => x.value === type)?.description ?? null;
   };
 
   function showConfirmPostulation(contestId) {

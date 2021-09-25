@@ -60,7 +60,7 @@ export default function MyUniversity() {
 	}, []);
 
 	const handleProvinceChange = (value) => {
-		setCities(provinces?.filter((x) => x.name === value)[0]?.cities);
+		setCities(provinces?.find((x) => x.name === value)?.cities);
 	};
 
 	const addressGenerator = (values) => {
@@ -81,7 +81,7 @@ export default function MyUniversity() {
 
 	const getUniversityType = (type) => {
 		return (
-			universityTypes.filter((x) => x.value === type)[0]?.description ?? null
+			universityTypes.find((x) => x.value === type)?.description ?? null
 		);
 	};
 
