@@ -27,9 +27,17 @@ const profileLabels = {
     [roles.UHumanResources]: 'Recursos Humanos',
   }
 
+  const profileColors = {
+    [roles.Teacher]: 'blue',
+    [roles.UAdmin]: 'red',
+    [roles.UCouncilMember]: 'lime',
+    [roles.UHumanResources]: 'green',
+  }
+
 export default function MainLayout(props) {
     const [siderNavigation, setSiderNavigation] = useState('')
     const [profileLabel, setProfileLabel] = useState('')
+    const [profileColor, setProfileColor] = useState('')
     const { userData, setUserData } = useContext(UserContext)
 
     useMemo(async () => {
@@ -40,6 +48,7 @@ export default function MainLayout(props) {
         else {
             setSiderNavigation(data?.user?.role)
             setProfileLabel(profileLabels[data?.user?.role])
+            setProfileColor(profileColors[data?.user?.role])
             const response = await userService.getUserByToken()
             setUserData(response)
         }
@@ -67,7 +76,7 @@ export default function MainLayout(props) {
                         ghost={false}
                         title={<img alt={"logo-EduSearch"} src={logoSrc} />}
                         extra={[
-                            <Tag key='4' color="blue" size={64}>{profileLabel}</Tag>,
+                            <Tag key='4' color={profileColor} size={64}>{profileLabel}</Tag>,
                             <Button key="3" shape='circle' size='large' icon={<InfoCircleOutlined />} />,
                             <Button key="2" shape='circle' size='large' icon={<BellOutlined />} />,
                             <Popover key="1" placement="bottomRight" content={content}>
