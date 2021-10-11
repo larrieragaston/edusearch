@@ -2,8 +2,8 @@ import { countriesList } from "./countries";
 import { provincesList } from "./provinces";
 
 export const apiTimeout = 1000 * 15; // 15 sec
-// export const apiBaseUrl = 'http://localhost:4000'
-export const apiBaseUrl = "https://edu-search-api.herokuapp.com/";
+export const apiBaseUrl = 'http://localhost:4000'
+// export const apiBaseUrl = "https://edu-search-api.herokuapp.com/";
 export const boxShadow = "0px 5px 25px 0px rgba(0, 0, 0, 0.2)";
 export const bucketBaseUrl = "https://bucket-glarriera-personal.s3.sa-east-1.amazonaws.com/";
 
@@ -98,7 +98,10 @@ export const periodTypes = [
 export const contestTypes = {
   all: "all",
   postulations: "postulations",
-  favourites: "favourites"
+  favourites: "favourites",
+  drafts: "drafts",
+  actives: "actives",
+  ended: "ended"
 }
 export const universityTypes = [
   { value: "NonUniversitary", description: "Superior No Universitario" },

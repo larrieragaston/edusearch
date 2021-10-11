@@ -15,7 +15,7 @@ import localStorage from "../services/localStorage";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-export default function TeacherNavigation() {
+export default function UniversityNavigation() {
 	const [collapsed, setCollapsed] = useState(false);
 
 	const logout = () => {
