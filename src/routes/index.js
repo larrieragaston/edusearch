@@ -21,6 +21,7 @@ import FAQ from "../modules/faq";
 import { NotAuthorized, NotFound, ServerError } from "../modules/errors";
 import { UserContext } from "../contexts/userContext";
 import { roles } from "../constants";
+import HomeUniversity from './../modules/homeUniversity/index';
 
 const fullHeight = { height: "100%" };
 
@@ -36,6 +37,7 @@ function Routes() {
 		if (userData?.role == roles.Teacher)
 			return (
 				<>
+					<Home default />
 					<PersonalInformation path="personal-information" />
 					<ProfessionalInformation path="my-resume" />
 					<Contests path="contests/:type" />
@@ -49,6 +51,7 @@ function Routes() {
 		)
 			return (
 				<>
+					<HomeUniversity default />
 					<MyUniversity path="my-university" />
 					<ScoreTable path="score-table" />
 					<Careers path="careers" />
@@ -69,7 +72,6 @@ function Routes() {
 				<Register path="/register" />
 				<Forgot path="/forgot" />
 				<MainLayout path="/">
-					<Home default />
 					<AccountSettings path="acccount-settings" />
 					{profileRoutes()}
 					<FAQ path="faq" />

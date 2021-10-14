@@ -18,6 +18,14 @@ export default function DashboardNumber({ data }) {
                 return 'Cursos en los que te has postulado han publicado sus resultados'
             case dashboardCardTypes.NEW_CONTESTS:
                 return 'Nuevos concursos han sido publicados que pueden ser de tu interes'
+            case dashboardCardTypes.ACTIVE_CONTESTS:
+                return 'Concursos Activos'
+            case dashboardCardTypes.DRAFT_CONTESTS:
+                return 'Concursos en Borradores'
+            case dashboardCardTypes.CAREERS_UPLOADED:
+                return 'Carreras Cargadas'
+            case dashboardCardTypes.USERS:
+                return 'Usuarios'
             default:
                 return 'ERROR'
         }

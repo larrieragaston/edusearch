@@ -14,6 +14,7 @@ import moment from "moment";
 import { navigate } from "@reach/router";
 import postulationService from "../services/postulation";
 import favouriteService from "./../services/favourite";
+import { contestSteps } from "./../constants/index";
 
 const { Text } = Typography;
 const { confirm } = Modal;
@@ -130,7 +131,15 @@ export default function Contest({ data, isUniversity }) {
 				</Col>
 			</Row>
 			<Row>
-				{isFavourite ? (
+				{isUniversity ? (
+					<Text
+						style={{
+							color: "#0262CF",
+						}}
+					>
+						[{data?.activeStage ? contestSteps[data.activeStage] : "Borrador"}]
+					</Text>
+				) : isFavourite ? (
 					<HeartFilled
 						style={{
 							color: "#e01616",
