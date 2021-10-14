@@ -13,7 +13,7 @@ const { Text, Title } = Typography;
 
 const uploadProps = (setUserData, userData) => ({
     name: 'profilePicture',
-    action: `${apiBaseUrl}/users/me/img`,
+    action: `${apiBaseUrl}users/me/img`,
     headers: {
         Authorization: localStorage.get()?.token,
     },
