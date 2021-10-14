@@ -34,7 +34,7 @@ const { Text, Title } = Typography;
 
 const uploadProps = (setData, data) => ({
 	name: "universityLogo",
-	action: `${apiBaseUrl}/universities/logo`,
+	action: `${apiBaseUrl}universities/logo`,
 	headers: {
 		Authorization: localStorage.get()?.token,
 	},
