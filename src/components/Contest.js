@@ -122,7 +122,7 @@ export default function Contest({ data, isUniversity }) {
 					<img
 						alt={"logo-universidad"}
 						src={
-							data.university?.logoUrl != null
+							data?.university?.logoUrl != null
 								? `${bucketBaseUrl}${data.university.logoUrl}`
 								: noLogo
 						}
@@ -137,7 +137,13 @@ export default function Contest({ data, isUniversity }) {
 							color: "#0262CF",
 						}}
 					>
-						[{data?.activeStage ? contestSteps[data.activeStage] : "Borrador"}]
+						[
+						{data?.active
+							? data.hasColloquium
+								? contestSteps[data?.activeStage]
+								: contestSteps.filter((x) => x != "Coloquio")[data?.activeStage]
+							: "Borrador"}
+						]
 					</Text>
 				) : isFavourite ? (
 					<HeartFilled
