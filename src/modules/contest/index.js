@@ -19,6 +19,7 @@ import contestService from "./../../services/contest";
 import universityService from "../../services/university";
 import { UserContext } from "../../contexts/userContext";
 import moment from "moment";
+import { navigate } from "@reach/router";
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -97,6 +98,7 @@ export default function Contest(props) {
 			toast.error(message);
 		} finally {
 			setIsSubmitting(false);
+			isDraft ? navigate("/contests/drafts") : navigate("/contests/actives")
 		}
 	};
 
@@ -260,9 +262,6 @@ export default function Contest(props) {
 									<Button type="primary" loading block>
 										Enviando
 									</Button>
-									{/* <Button type="link" disabled>
-									Cancelar
-								</Button> */}
 								</Form.Item>
 							)}
 						</Form>

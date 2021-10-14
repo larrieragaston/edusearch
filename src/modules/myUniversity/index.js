@@ -8,12 +8,21 @@ import {
 	Form,
 	Input,
 	Avatar,
+	Image,
 	Select,
 	InputNumber,
-	Divider, Upload, message
+	Divider,
+	Upload,
+	message,
 } from "antd";
 import { BankOutlined, EditOutlined } from "@ant-design/icons";
-import { noInformation, provinces, universityTypes, apiBaseUrl, bucketBaseUrl } from "../../constants";
+import {
+	noInformation,
+	provinces,
+	universityTypes,
+	apiBaseUrl,
+	bucketBaseUrl,
+} from "../../constants";
 import universityService from "../../services/university";
 import errorMessage from "../../utils/errorMessage";
 import { toast } from "react-toastify";
@@ -24,23 +33,23 @@ const { Option } = Select;
 const { Text, Title } = Typography;
 
 const uploadProps = (setData, data) => ({
-    name: 'universityLogo',
-    action: `${apiBaseUrl}/universities/logo`,
-    headers: {
-        Authorization: localStorage.get()?.token,
-    },
-    onChange(info) {
-        if (info.file.status !== 'uploading') {
-            console.log(info.file, info.fileList);
-        }
-        if (info.file.status === 'done') {
-            setData({...data, logoUrl: info?.file?.response?.logoUrl})
-            message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-        }
-    },
-})
+	name: "universityLogo",
+	action: `${apiBaseUrl}/universities/logo`,
+	headers: {
+		Authorization: localStorage.get()?.token,
+	},
+	onChange(info) {
+		if (info.file.status !== "uploading") {
+			console.log(info.file, info.fileList);
+		}
+		if (info.file.status === "done") {
+			setData({ ...data, logoUrl: info?.file?.response?.logoUrl });
+			message.success(`${info.file.name} file uploaded successfully`);
+		} else if (info.file.status === "error") {
+			message.error(`${info.file.name} file upload failed.`);
+		}
+	},
+});
 
 export default function MyUniversity() {
 	const [data, setData] = useState({});
@@ -80,9 +89,7 @@ export default function MyUniversity() {
 	};
 
 	const getUniversityType = (type) => {
-		return (
-			universityTypes.find((x) => x.value === type)?.description ?? null
-		);
+		return universityTypes.find((x) => x.value === type)?.description ?? null;
 	};
 
 	const onFinish = async (values) => {
@@ -136,16 +143,29 @@ export default function MyUniversity() {
 						<>
 							<Row>
 								<Col span={10}>
-									<Row justify='center'>
-                                        <Avatar size={100} {...(data?.logoUrl ? {src: `${bucketBaseUrl}${data.logoUrl}` } : { icon: <BankOutlined /> })} />
-                                    </Row>
-                                    <Row justify='center' {...{justify: 'center'}}>
-                                         <Upload {...uploadProps(setData, data)}>
-                                            <Button icon={<EditOutlined />} style={{ marginTop: '15px'}}>
-                                                <Text type='secondary'>Editar el logo de la universidad</Text>
-                                            </Button>
-                                         </Upload>
-                                    </Row>
+									<Row justify="center">
+										{/* <Avatar size={100} {...(data?.logoUrl ? {src: `${bucketBaseUrl}${data.logoUrl}` } : { icon: <BankOutlined /> })} /> */}
+										{data?.logoUrl ? (
+											<Avatar
+												size={100}
+												src={<Image src={bucketBaseUrl + data.logoUrl} />}
+											/>
+										) : (
+											<Avatar size={100} icon={<BankOutlined />} />
+										)}
+									</Row>
+									<Row justify="center" {...{ justify: "center" }}>
+										<Upload {...uploadProps(setData, data)}>
+											<Button
+												icon={<EditOutlined />}
+												style={{ marginTop: "15px" }}
+											>
+												<Text type="secondary">
+													Editar el logo de la universidad
+												</Text>
+											</Button>
+										</Upload>
+									</Row>
 								</Col>
 								<Col span={14}>
 									<Row>
