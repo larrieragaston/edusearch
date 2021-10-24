@@ -37,22 +37,22 @@ const columns = [
 		title: "Nombre",
 		dataIndex: "name",
 		key: "name",
-		align: 'center',
-		width: 250
+		align: "center",
+		width: 250,
 	},
 	{
 		title: "Email",
 		dataIndex: "email",
 		key: "email",
-		align: 'center',
-		width: 400
+		align: "center",
+		width: 400,
 	},
 	{
 		title: "Puntaje",
 		dataIndex: "score",
 		key: "score",
-		align: 'center',
-		width: 120
+		align: "center",
+		width: 120,
 	},
 ];
 
@@ -68,12 +68,12 @@ export default function UniversityContestDetails(props) {
 				await contestService.getPostulationsByContest(props.id);
 			setData(contest);
 			setActiveStage(contest.activeStage);
-			const dataTable = postulationsByContest.map(function (x,i) {
+			const dataTable = postulationsByContest.map(function (x, i) {
 				const key = x._id;
-				const number = i+1;
-				const name = x.user.lastName + ', ' + x.user.firstName;
+				const number = i + 1;
+				const name = x.user.lastName + ", " + x.user.firstName;
 				const email = x.user.email ?? noInformation;
-				const score = "-";
+				const score = x.postulationScore ?? "-";
 				return { key, number, name, email, score };
 			});
 			setPostulations(dataTable);
@@ -109,9 +109,10 @@ export default function UniversityContestDetails(props) {
 		});
 	}
 
-	const nextStage = async (contestId) => {
+	const nextStage = async (contestId, isAlmostClose) => {
 		try {
-			await contestService.nextStage(contestId);
+			if (isAlmostClose) await contestService.closeContest(contestId);
+			else await contestService.nextStage(contestId);
 			setActiveStage(activeStage + 1);
 		} catch (e) {
 			console.log(e);
@@ -204,6 +205,11 @@ export default function UniversityContestDetails(props) {
 							<Button type="primary" disabled>
 								Concurso Finalizado
 							</Button>
+						) : activeStage == 5 ||
+						  (activeStage == 4 && !data.hasColloquium) ? (
+							<Button type="primary" onClick={() => nextStage(data._id, true)}>
+								Finalizar Concurso
+							</Button>
 						) : (
 							<Button type="primary" onClick={() => nextStage(data._id)}>
 								Avanzar Etapa
@@ -232,8 +238,8 @@ export default function UniversityContestDetails(props) {
 					Resultados
 				</Text>
 			</Row>
-			<Row justify='center'>
-				<Table dataSource={postulations} columns={columns} size='middle'/>
+			<Row justify="center">
+				<Table dataSource={postulations} columns={columns} size="middle" />
 			</Row>
 		</React.Fragment>
 	);
