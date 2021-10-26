@@ -106,8 +106,8 @@ export default function Contest({ data, isUniversity }) {
 			}}
 			bodyStyle={{ padding: "15px" }}
 		>
-			<Row>
-				<Col span={12}>
+			<Row justify="space-between" style={{ height: "5em" }}>
+				<Col span={14}>
 					<Text type="secondary" style={{ fontSize: "14px" }}>
 						{" "}
 						Fecha de finalización: <br />{" "}
@@ -118,7 +118,7 @@ export default function Contest({ data, isUniversity }) {
 							: noInformation}
 					</Text>
 				</Col>
-				<Col span={10} offset={2}>
+				<Col span={10}>
 					<img
 						alt={"logo-universidad"}
 						src={
@@ -126,26 +126,30 @@ export default function Contest({ data, isUniversity }) {
 								? `${bucketBaseUrl}${data.university.logoUrl}`
 								: noLogo
 						}
-						style={{ maxWidth: "9em" }}
+						style={{ maxWidth: "9em", maxHeight: "5em" }}
 					/>
 				</Col>
 			</Row>
 			<Row>
-				{isUniversity ? (
-					<Text
-						style={{
-							color: "#0262CF",
-						}}
-					>
-						[
-						{data?.active
-							? data.hasColloquium
-								? contestSteps[data?.activeStage]
-								: contestSteps.filter((x) => x != "Coloquio")[data?.activeStage]
-							: "Borrador"}
-						]
-					</Text>
-				) : isFavourite ? (
+				<Text
+					style={{
+						color: "#0262CF",
+					}}
+				>
+					[
+					{data?.active
+						? data.hasColloquium
+							? contestSteps[data?.activeStage]
+							: contestSteps.filter((x) => x != "Coloquio")[data?.activeStage]
+						: "Borrador"}
+					]
+				</Text>
+			</Row>
+			<Row>
+				<Text style={{ fontSize: "20px" }} strong>
+					{data?.subject?.name ?? noInformation}
+				</Text>
+				{!isUniversity && isFavourite ? (
 					<HeartFilled
 						style={{
 							color: "#e01616",
@@ -168,11 +172,6 @@ export default function Contest({ data, isUniversity }) {
 						onClick={() => saveFavourite(data._id)}
 					/>
 				)}
-			</Row>
-			<Row>
-				<Text style={{ fontSize: "20px" }} strong>
-					{data?.subject?.name ?? noInformation}
-				</Text>
 			</Row>
 			<Col span={6}>
 				<hr style={{ border: "1px solid #0262CF", marginTop: "0" }} />
@@ -238,6 +237,10 @@ export default function Contest({ data, isUniversity }) {
 				) : hasPostulation ? (
 					<Button type="primary" disabled>
 						Postulado
+					</Button>
+				) : data?.activeStage != 0 ? (
+					<Button type="primary" disabled>
+						Postularme
 					</Button>
 				) : (
 					<Button

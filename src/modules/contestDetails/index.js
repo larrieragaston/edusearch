@@ -229,6 +229,10 @@ export default function ContestDetails(props) {
 							<Button type="primary" disabled>
 								Postulado
 							</Button>
+						) :  data?.activeStage != 0 ? (
+							<Button type="primary" disabled>
+								Postularme
+							</Button>
 						) : (
 							<Button type="primary" onClick={() => postulate(data._id)}>
 								Postularme
