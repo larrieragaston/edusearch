@@ -60,7 +60,7 @@ export default function UniversityContests(props) {
 						indicator={<LoadingOutlined style={{ fontSize: 150 }} spin />}
 					/>
 				</Row>
-			) : contests?.length != 0 ? (
+			) : contests?.length !== 0 ? (
 				<React.Fragment>
 					<Row>
 						<Text

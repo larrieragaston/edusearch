@@ -137,11 +137,11 @@ export default function Contest({ data, isUniversity }) {
 					}}
 				>
 					[
-					{data?.active
-						? data.hasColloquium
-							? contestSteps[data?.activeStage]
-							: contestSteps.filter((x) => x != "Coloquio")[data?.activeStage]
-						: "Borrador"}
+					{data?.isDraft
+						? "Borrador"
+						: data.hasColloquium
+						? contestSteps[data?.activeStage]
+						: contestSteps.filter((x) => x !== "Coloquio")[data?.activeStage]}
 					]
 				</Text>
 			</Row>
@@ -214,41 +214,47 @@ export default function Contest({ data, isUniversity }) {
 				<Text>{data?.university?.name ?? noInformation}</Text>
 			</Row>
 			<Row justify="end">
-				{isUniversity && !data.active ? (
-					<></>
-				) : (
-					<Button type="link" onClick={() => navigate("/contest/" + data._id)}>
-						Ver Detalle
-					</Button>
-				)}
 				{isUniversity ? (
-					data.active ? (
-						<Button type="primary" disabled>
-							Editar
-						</Button>
-					) : (
+					data.isDraft ? (
 						<Button
 							type="primary"
 							onClick={() => navigate("/contest/edit/" + data._id)}
 						>
 							Editar
 						</Button>
+					) : (
+						<Button
+							type="link"
+							onClick={() => navigate("/contest/" + data._id)}
+						>
+							Ver Detalle
+						</Button>
 					)
-				) : hasPostulation ? (
-					<Button type="primary" disabled>
-						Postulado
-					</Button>
-				) : data?.activeStage != 0 ? (
-					<Button type="primary" disabled>
-						Postularme
-					</Button>
 				) : (
-					<Button
-						type="primary"
-						onClick={() => showConfirmPostulation(data._id)}
-					>
-						Postularme
-					</Button>
+					<>
+						<Button
+							type="link"
+							onClick={() => navigate("/contest/" + data._id)}
+						>
+							Ver Detalle
+						</Button>
+						{hasPostulation ? (
+							<Button type="primary" disabled>
+								Postulado
+							</Button>
+						) : data?.activeStage !== 0 ? (
+							<Button type="primary" disabled>
+								Postularme
+							</Button>
+						) : (
+							<Button
+								type="primary"
+								onClick={() => showConfirmPostulation(data._id)}
+							>
+								Postularme
+							</Button>
+						)}
+					</>
 				)}
 			</Row>
 		</Card>

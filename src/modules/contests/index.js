@@ -27,6 +27,9 @@ export default function Contests(props) {
 				case contestTypes.favourites:
 					contestForUser = await contestService.getFavouriteContest();
 					break;
+				case contestTypes.closed:
+					contestForUser = await contestService.getClosedContest();
+					break;
 				default:
 					contestForUser = null;
 					break;
@@ -43,9 +46,11 @@ export default function Contests(props) {
 			case contestTypes.all:
 				return "Busquedas Activas";
 			case contestTypes.postulations:
-				return "Postulacones";
+				return "Postulaciones";
 			case contestTypes.favourites:
 				return "Favoritos";
+			case contestTypes.closed:
+				return "Finalizados";
 			default:
 				return "Error";
 		}
@@ -60,7 +65,7 @@ export default function Contests(props) {
 						indicator={<LoadingOutlined style={{ fontSize: 150 }} spin />}
 					/>
 				</Row>
-			) : contests?.length != 0 ? (
+			) : contests?.length !== 0 ? (
 				<React.Fragment>
 					<Row>
 						<Text

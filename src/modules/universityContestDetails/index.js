@@ -201,12 +201,12 @@ export default function UniversityContestDetails(props) {
 
 				<Col span={10} style={{ alignSelf: "flex-end" }}>
 					<Row justify="end">
-						{activeStage == 6 || (activeStage == 5 && !data.hasColloquium) ? (
+						{activeStage === 6 || (activeStage === 5 && !data.hasColloquium) ? (
 							<Button type="primary" disabled>
 								Concurso Finalizado
 							</Button>
-						) : activeStage == 5 ||
-						  (activeStage == 4 && !data.hasColloquium) ? (
+						) : activeStage === 5 ||
+						  (activeStage === 4 && !data.hasColloquium) ? (
 							<Button type="primary" onClick={() => nextStage(data._id, true)}>
 								Finalizar Concurso
 							</Button>
