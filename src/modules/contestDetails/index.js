@@ -9,6 +9,7 @@ import {
 	Steps,
 	List,
 	Modal,
+	Table,
 } from "antd";
 import noLogo from "../../assets/noLogo.jpg";
 import {
@@ -34,14 +35,57 @@ const { Text } = Typography;
 const { TabPane } = Tabs;
 const { Step } = Steps;
 
+const columns = [
+	{
+		title: "#",
+		dataIndex: "number",
+		key: "number",
+	},
+	{
+		title: "Nombre",
+		dataIndex: "name",
+		key: "name",
+		align: "center",
+		width: 250,
+	},
+	{
+		title: "Email",
+		dataIndex: "email",
+		key: "email",
+		align: "center",
+		width: 400,
+	},
+	{
+		title: "Puntaje",
+		dataIndex: "score",
+		key: "score",
+		align: "center",
+		width: 120,
+	},
+];
+
 export default function ContestDetails(props) {
 	const [data, setContest] = useState([]);
 	const [hasPostulation, setHasPostulation] = useState(data?.hasPostulation);
 	const [isFavourite, setIsFavourite] = useState(data?.isFavourite);
+	const [postulations, setPostulations] = useState(data?.activeStage);
 
 	useEffect(() => {
 		async function fetchData() {
 			const contest = await contestService.getContestById(props.id);
+			if (contest?.isClosed) {
+				const postulationsByContest =
+					await contestService.getPostulationsByContest(props.id);
+				const dataTable = postulationsByContest.map(function (x, i) {
+					const key = x._id;
+					const number = i + 1;
+					const name = x.user.lastName + ", " + x.user.firstName;
+					const email = x.user.email ?? noInformation;
+					const score = x.postulationScore ?? "-";
+					return { key, number, name, email, score };
+				});
+				setPostulations(dataTable);
+			}
 			setContest(contest);
 			setHasPostulation(contest.hasPostulation);
 			setIsFavourite(contest.isFavourite);
@@ -229,6 +273,10 @@ export default function ContestDetails(props) {
 							<Button type="primary" disabled>
 								Postulado
 							</Button>
+						) : data?.activeStage !== 0 ? (
+							<Button type="primary" disabled>
+								Postularme
+							</Button>
 						) : (
 							<Button type="primary" onClick={() => postulate(data._id)}>
 								Postularme
@@ -305,6 +353,29 @@ export default function ContestDetails(props) {
 					{getSteps(data.hasColloquium)}
 				</Steps>
 			</Row>
+			{data?.isClosed ? 
+			(
+				<>
+					<Divider />
+
+					<Row>
+						<Text
+							style={{
+								color: "#0262CF",
+								fontSize: "26px",
+								paddingBottom: "1.5em",
+							}}
+						>
+							Resultados
+						</Text>
+					</Row>
+					<Row justify="center">
+						<Table dataSource={postulations} columns={data?.showResultsScore ? columns : columns.filter(c => c.key !== 'score')} size="middle" />
+					</Row>
+				</>
+			) : (
+				<></>
+			)}
 		</React.Fragment>
 	);
 }

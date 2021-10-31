@@ -60,7 +60,7 @@ export default function MainLayout(props) {
     }
 
     const content = (
-        userData?.role == roles.Teacher ? 
+        userData?.role === roles.Teacher ? 
             <div style={{ maxWidth: 150 }}>
                 <Button type="text" block onClick={() => navigate('/personal-information')}>Datos Personales</Button>
                 <Button type="text" block onClick={() => navigate('/acccount-settings')}>Mi Cuenta</Button>

@@ -85,7 +85,14 @@ export default function Contest(props) {
 
 	const onFinish = async (values) => {
 		setIsSubmitting(true);
-		const payload = { ...values, active: !isDraft, startsAt, endsAt };
+		const staticRequeriments = [
+			{ name: 'Acá enlistas los requisitos del docente', optional: false },
+			{ name: 'Como cinco o seis cosas.', optional: false },
+			{ name: 'Asi se veria algo que no cumple', optional: true },
+			{ name: 'Y que evidentemente queden cinco ítems.', optional: false },
+			{ name: 'Con un interlineado más grande', optional: true },
+			{ name: 'Que los textos normales.', optional: false }]
+		const payload = { ...values, isDraft: isDraft, startsAt, endsAt, isClosed: false, requirements: staticRequeriments };
 		console.log(payload);
 		try {
 			if(props?.id){

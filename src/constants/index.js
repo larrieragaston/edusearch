@@ -103,6 +103,7 @@ export const contestTypes = {
   all: "all",
   postulations: "postulations",
   favourites: "favourites",
+  closed: "closed",
   drafts: "drafts",
   actives: "actives",
   ended: "ended"

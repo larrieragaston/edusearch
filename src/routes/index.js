@@ -34,7 +34,7 @@ function Routes() {
 	);
 
 	const profileRoutes = () => {
-		if (userData?.role == roles.Teacher)
+		if (userData?.role === roles.Teacher)
 			return (
 				<>
 					<Home default />
@@ -45,9 +45,9 @@ function Routes() {
 				</>
 			);
 		if (
-			userData?.role == roles.UAdmin ||
-			userData?.role == roles.UCouncilMember ||
-			userData?.role == roles.UHumanResources
+			userData?.role === roles.UAdmin ||
+			userData?.role === roles.UCouncilMember ||
+			userData?.role === roles.UHumanResources
 		)
 			return (
 				<>

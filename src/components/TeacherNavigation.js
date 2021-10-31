@@ -43,9 +43,11 @@ export default function TeacherNavigation() {
 					<Menu.Item key="17" onClick={() => navigate("/contests/all")}>Todos</Menu.Item>
 					<Menu.Item key="18" onClick={() => navigate("/contests/postulations")}>Postulaciones</Menu.Item>
 					<Menu.Item key="19" onClick={() => navigate("/contests/favourites")}>Favoritos</Menu.Item>
+					<Menu.Item key="20" onClick={() => navigate("/contests/closed")}>Finalizados</Menu.Item>
+
 				</SubMenu>
-				<Menu.Item key="20" icon={<QuestionCircleOutlined />} onClick={() => navigate("/faq")}>F.A.Q.</Menu.Item>
-				<Menu.Item key="21" icon={<LogoutOutlined />} onClick={() => logout()}>Cerrar sesión</Menu.Item>
+				<Menu.Item key="21" icon={<QuestionCircleOutlined />} onClick={() => navigate("/faq")}>F.A.Q.</Menu.Item>
+				<Menu.Item key="22" icon={<LogoutOutlined />} onClick={() => logout()}>Cerrar sesión</Menu.Item>
 			</Menu>
 		</Sider>
 	);
