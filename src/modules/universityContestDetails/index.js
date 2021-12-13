@@ -48,6 +48,13 @@ const columns = [
 		width: 400,
 	},
 	{
+		title: "Teléfono",
+		dataIndex: "phone",
+		key: "phone",
+		align: "center",
+		width: 200,
+	},
+	{
 		title: "Puntaje",
 		dataIndex: "score",
 		key: "score",
@@ -73,8 +80,9 @@ export default function UniversityContestDetails(props) {
 				const number = i + 1;
 				const name = x.user.lastName + ", " + x.user.firstName;
 				const email = x.user.email ?? noInformation;
+				const phone = x.user.mobilePhone ?? noInformation;
 				const score = x.postulationScore ?? "-";
-				return { key, number, name, email, score };
+				return { key, number, name, email, phone, score };
 			});
 			setPostulations(dataTable);
 		}
