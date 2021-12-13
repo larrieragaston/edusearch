@@ -13,16 +13,19 @@ const columns = [
 		title: "Carrera",
 		dataIndex: "career",
 		key: "career",
+		sorter: (a, b) => a.career.length - b.career.length,
 	},
 	{
 		title: "Materia",
 		dataIndex: "subject",
 		key: "subject",
+		sorter: (a, b) => a.subject.length - b.subject.length,
 	},
 	{
 		title: "Periodo",
 		dataIndex: "periodType",
 		key: "periodType",
+		sorter: (a, b) => a.periodType.length - b.periodType.length,
 	},
 	{
 		title: "Programa",
@@ -54,8 +57,8 @@ export default function Careers() {
 							shape="round"
 							icon={<DownloadOutlined />}
 							href=""
-							download="Programa"
-							disabled={x.curriculum ? false : true}
+							download={ x.name + "-Programa" }
+							// disabled={x.curriculum ? false : true}
 							size={10}
 						>
 							Descargar Programa

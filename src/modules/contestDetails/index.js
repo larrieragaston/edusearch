@@ -319,7 +319,7 @@ export default function ContestDetails(props) {
 						)}
 					</TabPane>
 					<TabPane tab="Programa" key="2">
-						<Row>
+						<Row style={{padding: 20}}>
 							<Text>
 								Acá este espacio se lo dejamos a las distintas universidades
 								para que escriban lo que quieran al docente por si creen que es
@@ -327,14 +327,14 @@ export default function ContestDetails(props) {
 								programa de la materia o curso.
 							</Text>
 						</Row>
-						<Row>
+						<Row style={{padding: 20}}>
 							<Button
 								type="primary"
 								icon={<DownloadOutlined />}
 								size="large"
 								shape="round"
 								href=""
-								download="Programa"
+								download={ data.subject?.name ?? noInformation + "Programa" }
 							>
 								Descargar Programa
 							</Button>
@@ -357,7 +357,6 @@ export default function ContestDetails(props) {
 			(
 				<>
 					<Divider />
-
 					<Row>
 						<Text
 							style={{
