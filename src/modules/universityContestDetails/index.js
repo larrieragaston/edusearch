@@ -8,12 +8,14 @@ import {
 	Table,
 	Steps,
 	Modal,
+	Spin,
 } from "antd";
 import noLogo from "../../assets/noLogo.jpg";
 import {
 	ClockCircleOutlined,
 	CalendarOutlined,
 	ApartmentOutlined,
+	LoadingOutlined
 } from "@ant-design/icons";
 import {
 	contestSteps,
@@ -67,9 +69,11 @@ export default function UniversityContestDetails(props) {
 	const [data, setData] = useState({});
 	const [activeStage, setActiveStage] = useState(data?.activeStage);
 	const [postulations, setPostulations] = useState(data?.activeStage);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		async function fetchData() {
+			setIsLoading(true);
 			const contest = await contestService.getContestById(props.id);
 			const postulationsByContest =
 				await contestService.getPostulationsByContest(props.id);
@@ -85,6 +89,7 @@ export default function UniversityContestDetails(props) {
 				return { key, number, name, email, phone, score };
 			});
 			setPostulations(dataTable);
+			setIsLoading(false);
 		}
 		fetchData();
 	}, [props.id]);
@@ -106,7 +111,7 @@ export default function UniversityContestDetails(props) {
 		const today = moment();
 		const diffDays = dateMoment.diff(today, "days");
 		return diffDays < 0
-			? `Las posulaciones ya se encuentran cerradas`
+			? `Las postulaciones ya se encuentran cerradas`
 			: `Quedan ${diffDays} días para que se cierren las postulaciones`;
 	};
 
@@ -129,126 +134,149 @@ export default function UniversityContestDetails(props) {
 	};
 
 	return (
-		<React.Fragment>
-			<Row style={{ paddingTop: "2em", paddingLeft: "1em" }}>
-				<Col span={12}>
-					<Row style={{ alignItems: "center" }}>
-						<Text style={{ fontSize: "26px" }}>
-							{data.subject?.name ?? noInformation}
-						</Text>
-					</Row>
-					<Row
-						style={{
-							fontStyle: "italic",
-							fontSize: "14px",
-							paddingBottom: "0.7em",
-						}}
-					>
-						{data.dueDate ? (
-							<Text>{getDaysDifferenceText(data.dueDate)}</Text>
-						) : (
-							<Text>
-								No se ha establecido fecha para el cierre de postulaciones
-							</Text>
-						)}
-					</Row>
-				</Col>
-				<Col span={10}>
-					<Row justify="end">
-						<img
-							height={50}
-							alt={"logo-universidad"}
-							src={
-								data.university?.logoUrl != null
-									? `${bucketBaseUrl}${data.university.logoUrl}`
-									: noLogo
-							}
-						/>
-					</Row>
-				</Col>
-				<Col span={12}>
-					<Row style={{ alignItems: "center" }}>
-						<ClockCircleOutlined
-							style={{
-								color: "#0262CF",
-								paddingLeft: "0.3em",
-								paddingRight: "0.5em",
-							}}
-						/>
-						<Text>
-							{data.day ?? noInformation} -{" "}
-							{data.startsAt || data.endsAt
-								? data.startsAt + "hs a " + data.endsAt + "hs"
-								: noInformation}
-						</Text>
-					</Row>
-					<Row>
-						<CalendarOutlined
-							style={{
-								color: "#0262CF",
-								paddingLeft: "0.3em",
-								paddingRight: "0.5em",
-							}}
-						/>
-						<Text>
-							Periodo{" "}
-							{getPeriodType(data?.subject?.periodType) ?? noInformation}
-						</Text>
-					</Row>
-					<Row>
-						<ApartmentOutlined
-							style={{
-								color: "#0262CF",
-								paddingLeft: "0.3em",
-								paddingRight: "0.5em",
-							}}
-						/>
-						<Text>{data.university?.name ?? noInformation}</Text>
-					</Row>
-				</Col>
+		<>
+			{isLoading ? (
+				<Row justify="center" style={{ paddingTop: "150px" }}>
+					<Spin
+						tip="Cargando..."
+						indicator={<LoadingOutlined style={{ fontSize: 150 }} spin />}
+					/>
+				</Row>
+			) : (
+				<React.Fragment>
+					<Row style={{ paddingTop: "2em", paddingLeft: "1em" }}>
+						<Col span={12}>
+							<Row style={{ alignItems: "center" }}>
+								<Text style={{ fontSize: "26px" }}>
+									{data.subject?.name ?? noInformation}
+								</Text>
+							</Row>
+							<Row
+								style={{
+									fontStyle: "italic",
+									fontSize: "14px",
+									paddingBottom: "0.7em",
+								}}
+							>
+								{data.dueDate ? (
+									<Text>{getDaysDifferenceText(data.dueDate)}</Text>
+								) : (
+									<Text>
+										No se ha establecido fecha para el cierre de postulaciones
+									</Text>
+								)}
+							</Row>
+						</Col>
+						<Col span={10}>
+							<Row justify="end">
+								<img
+									height={50}
+									alt={"logo-universidad"}
+									src={
+										data.university?.logoUrl != null
+											? `${bucketBaseUrl}${data.university.logoUrl}`
+											: noLogo
+									}
+								/>
+							</Row>
+						</Col>
+						<Col span={12}>
+							<Row style={{ alignItems: "center" }}>
+								<ClockCircleOutlined
+									style={{
+										color: "#0262CF",
+										paddingLeft: "0.3em",
+										paddingRight: "0.5em",
+									}}
+								/>
+								<Text>
+									{data.day ?? noInformation} -{" "}
+									{data.startsAt || data.endsAt
+										? data.startsAt + "hs a " + data.endsAt + "hs"
+										: noInformation}
+								</Text>
+							</Row>
+							<Row>
+								<CalendarOutlined
+									style={{
+										color: "#0262CF",
+										paddingLeft: "0.3em",
+										paddingRight: "0.5em",
+									}}
+								/>
+								<Text>
+									Periodo{" "}
+									{getPeriodType(data?.subject?.periodType) ?? noInformation}
+								</Text>
+							</Row>
+							<Row>
+								<ApartmentOutlined
+									style={{
+										color: "#0262CF",
+										paddingLeft: "0.3em",
+										paddingRight: "0.5em",
+									}}
+								/>
+								<Text>{data.university?.name ?? noInformation}</Text>
+							</Row>
+						</Col>
 
-				<Col span={10} style={{ alignSelf: "flex-end" }}>
-					<Row justify="end">
-						{activeStage === 6 || (activeStage === 5 && !data.hasColloquium) ? (
-							<Button type="primary" disabled>
-								Concurso Finalizado
-							</Button>
-						) : activeStage === 5 ||
-						  (activeStage === 4 && !data.hasColloquium) ? (
-							<Button type="primary" onClick={() => nextStage(data._id, true)}>
-								Finalizar Concurso
-							</Button>
-						) : (
-							<Button type="primary" onClick={() => nextStage(data._id)}>
-								Avanzar Etapa
-							</Button>
-						)}
+						<Col span={10} style={{ alignSelf: "flex-end" }}>
+							<Row justify="end">
+								{activeStage === 6 ||
+								(activeStage === 5 && !data.hasColloquium) ? (
+									<Button type="primary" disabled>
+										Concurso Finalizado
+									</Button>
+								) : activeStage === 5 ||
+								  (activeStage === 4 && !data.hasColloquium) ? (
+									<Button
+										type="primary"
+										onClick={() => nextStage(data._id, true)}
+									>
+										Finalizar Concurso
+									</Button>
+								) : (
+									<Button type="primary" onClick={() => nextStage(data._id)}>
+										Avanzar Etapa
+									</Button>
+								)}
+							</Row>
+						</Col>
 					</Row>
-				</Col>
-			</Row>
-			<Divider />
-			<Row>
-				<Text
-					style={{ color: "#0262CF", fontSize: "26px", paddingBottom: "1.5em" }}
-				>
-					Etapa activa del Concurso
-				</Text>
-				<Steps progressDot current={activeStage ?? 0}>
-					{getSteps(data.hasColloquium)}
-				</Steps>
-			</Row>
-			<Divider />
+					<Divider />
+					<Row>
+						<Text
+							style={{
+								color: "#0262CF",
+								fontSize: "26px",
+								paddingBottom: "1.5em",
+							}}
+						>
+							Etapa activa del Concurso
+						</Text>
+						<Steps progressDot current={activeStage ?? 0}>
+							{getSteps(data.hasColloquium)}
+						</Steps>
+					</Row>
+					<Divider />
 
-			<Row>
-				<Text
-					style={{ color: "#0262CF", fontSize: "26px", paddingBottom: "1.5em" }}
-				>
-					Resultados
-				</Text>
-			</Row>
-			<Row justify="center">
-				<Table dataSource={postulations} columns={columns} size="middle" />
-			</Row>
-		</React.Fragment>
+					<Row>
+						<Text
+							style={{
+								color: "#0262CF",
+								fontSize: "26px",
+								paddingBottom: "1.5em",
+							}}
+						>
+							Resultados
+						</Text>
+					</Row>
+					<Row justify="center">
+						<Table dataSource={postulations} columns={columns} size="middle" />
+					</Row>
+				</React.Fragment>
+			)}
+		</>
 	);
 }

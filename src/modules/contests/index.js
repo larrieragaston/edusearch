@@ -44,7 +44,7 @@ export default function Contests(props) {
 	const getPageTitle = (type) => {
 		switch (type) {
 			case contestTypes.all:
-				return "Busquedas Activas";
+				return "Búsquedas Activas";
 			case contestTypes.postulations:
 				return "Postulaciones";
 			case contestTypes.favourites:

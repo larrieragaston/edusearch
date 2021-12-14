@@ -42,7 +42,7 @@ export default function Home() {
                 <DashboardNumber data={{ quantity: 1, type: 'FAVOURITE_TO_EXPIRE' }} />
             </Row>
             <Row>
-                <Text style={{ fontSize: '20px', color: '#0262CF', paddingBottom: '0.9em' }}>Últimas busquedas ({contestsCount})</Text>
+                <Text style={{ fontSize: '20px', color: '#0262CF', paddingBottom: '0.9em' }}>Últimas búsquedas ({contestsCount})</Text>
             </Row>
             <Row>
                 {contests ? contests.map(x => <Contest key={x._id} data={x} />) : noInformation}
